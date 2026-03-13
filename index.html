@@ -670,13 +670,17 @@
             font-weight: 500;
         }
 
+        .lote-card.reservado {
+            pointer-events: none;
+        }
+
         .lote-card.reservado .lote-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255,255,255,0.6);
+            background: rgba(0,0,0,0.45);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -691,6 +695,10 @@
             transform: rotate(-15deg);
             font-size: 1.5rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .lote-card.reservado .btn-detalle {
+            display: none !important;
         }
 
         /* Galería Section */
@@ -861,6 +869,125 @@
             max-width: 600px;
             margin: 0 auto;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        /* Proceso Section */
+        .proceso-timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .proceso-timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--verde-medio);
+            z-index: 1;
+        }
+
+        .proceso-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 0 15px;
+        }
+
+        .step-icon-wrap {
+            width: 80px;
+            height: 80px;
+            background: var(--blanco);
+            border: 2px solid var(--verde-medio);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 25px;
+            transition: var(--transition);
+        }
+
+        .proceso-step:hover .step-icon-wrap {
+            background: var(--dorado);
+            border-color: var(--dorado);
+            transform: translateY(-5px);
+        }
+
+        .proceso-step h3 {
+            font-size: 1.2rem;
+            color: var(--verde-bosque);
+            margin-bottom: 15px;
+        }
+
+        .proceso-step p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background-color: var(--crema);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--blanco);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .faq-question {
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: var(--transition);
+        }
+
+        .faq-question h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--verde-bosque);
+        }
+
+        .faq-icon {
+            font-size: 1.2rem;
+            transition: transform 0.4s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease;
+            padding: 0 30px;
+            color: #555;
+            font-size: 1rem;
+            border-top: 1px solid transparent;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 20px 30px;
+            border-top: 1px solid #eee;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
         }
 
         /* Contacto Section */
@@ -1083,6 +1210,88 @@
             padding: 40px;
         }
 
+        .modal-legal-content {
+            background: var(--blanco);
+            max-width: 700px;
+            width: 100%;
+            border-radius: 20px;
+            position: relative;
+            padding: 50px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-legal-content h2 {
+            margin-bottom: 25px;
+            color: var(--verde-bosque);
+        }
+
+        .modal-legal-content p {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 58px;
+            height: 58px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            animation: pulse-wa 2s infinite;
+        }
+
+        @keyframes pulse-wa {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+        }
+
+        .whatsapp-float svg {
+            width: 34px;
+            height: 34px;
+            fill: white;
+        }
+
+        /* Video Modal */
+        #video-modal .modal-content {
+            max-width: 860px;
+            background: black;
+            display: block;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
         /* Lightbox */
         #lightbox {
             position: fixed;
@@ -1132,12 +1341,23 @@
 
         @media (max-width: 768px) {
             .nav-links, .nav-cta { display: none !important; }
+            .lotes-grid { grid-template-columns: 1fr; }
             .mobile-toggle { display: flex !important; }
             .proyecto-grid, .ubicacion-grid, .contacto-grid { grid-template-columns: 1fr; }
             .hero-stats { gap: 20px; }
             .modal-content { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 2.8rem; }
+
+            .proceso-timeline { flex-direction: column; gap: 40px; }
+            .proceso-timeline::before { display: none; }
+
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 52px;
+                height: 52px;
+            }
         }
     </style>
 </head>
@@ -1169,11 +1389,12 @@
                 <a href="#lotes" class="nav-link">Lotes</a>
                 <a href="#ubicacion" class="nav-link">Ubicación</a>
                 <a href="#galeria" class="nav-link">Galería</a>
+                <a href="#proceso" class="nav-link">Proceso</a>
                 <a href="#contacto" class="nav-link">Contacto</a>
             </div>
 
             <div class="nav-cta">
-                <a href="#contacto" class="btn btn-verde">Cotizar ahora</a>
+                <a href="#contacto" class="btn btn-verde" title="Llámanos al +56 9 8765 4321">Cotizar ahora</a>
             </div>
 
             <div class="mobile-toggle">
@@ -1191,6 +1412,7 @@
             <a href="#lotes" class="nav-link" style="font-size: 1.5rem;">Lotes</a>
             <a href="#ubicacion" class="nav-link" style="font-size: 1.5rem;">Ubicación</a>
             <a href="#galeria" class="nav-link" style="font-size: 1.5rem;">Galería</a>
+            <a href="#proceso" class="nav-link" style="font-size: 1.5rem;">Proceso</a>
             <a href="#contacto" class="nav-link" style="font-size: 1.5rem;">Contacto</a>
             <a href="#contacto" class="btn btn-primary" style="margin-top: 20px;">Cotizar ahora</a>
         </div>
@@ -1204,7 +1426,7 @@
             <p>Loteos residenciales a minutos del mar. Naturaleza, tranquilidad e inversión segura en la Quinta Región.</p>
             <div class="hero-btns">
                 <a href="#lotes" class="btn btn-primary">Ver lotes disponibles →</a>
-                <a href="#proyecto" class="btn btn-secondary">▶ Ver el proyecto</a>
+                <button id="btn-video" class="btn btn-secondary">▶ Ver el proyecto</button>
             </div>
             <div class="hero-stats">
                 <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
@@ -1326,11 +1548,11 @@
                     <div class="lote-content">
                         <h3>Lote B-01</h3>
                         <p class="lote-size">1.200 m²</p>
-                        <div class="lote-card-price">Precio a consultar</div>
+			            <div class="lote-card-price">No disponible</div>
                         <div class="lote-tags">
                             <span class="lote-tag">⭐ Premium</span>
                         </div>
-                        <button class="btn btn-verde" disabled>Ver detalle →</button>
+			            <button class="btn btn-verde btn-detalle" disabled>Ver detalle →</button>
                     </div>
                 </div>
 
@@ -1414,6 +1636,12 @@
                         <div class="error-msg">Ingresa un email válido</div>
                         <span class="valid-icon">✓</span>
                     </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <input type="tel" id="modal-phone" class="form-input" placeholder=" " required>
+                        <label for="modal-phone" class="form-label">Teléfono *</label>
+                        <div class="error-msg">Formato: +56 9 XXXX XXXX</div>
+                        <span class="valid-icon">✓</span>
+                    </div>
                     <button type="submit" class="btn btn-primary">Solicitar información</button>
                 </form>
             </div>
@@ -1429,36 +1657,36 @@
             </div>
 
             <div class="gallery-grid">
-                <div class="gallery-item large" data-aos="fade-up" data-src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800">
-                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800" alt="Bosque Mantagua" loading="lazy">
+                <div class="gallery-item large" data-aos="fade-up" data-src="https://images.unsplash.com/photo-1548013146-72479768bada?w=800">
+                    <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=800" alt="Costa Chilena 1" loading="lazy">
                     <div class="gallery-overlay"><i>🔍</i></div>
                 </div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100" data-src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800">
-                    <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600" alt="Costa Mantagua" loading="lazy">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100" data-src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="Costa Chilena 2" loading="lazy">
                     <div class="gallery-overlay"><i>🔍</i></div>
                 </div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200" data-src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=800">
-                    <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=600" alt="Naturaleza" loading="lazy">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200" data-src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=600">
+                    <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=600" alt="Costa Chilena 3" loading="lazy">
                     <div class="gallery-overlay"><i>🔍</i></div>
                 </div>
-                <div class="gallery-item large" data-aos="fade-up" data-aos-delay="300" data-src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=800">
-                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=800" alt="Parque" loading="lazy">
+                <div class="gallery-item large" data-aos="fade-up" data-aos-delay="300" data-src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800" alt="Costa Chilena 4" loading="lazy">
                     <div class="gallery-overlay"><i>🔍</i></div>
                 </div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400" data-src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800">
-                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600" alt="Montaña" loading="lazy">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400" data-src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600">
+                    <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600" alt="Costa Chilena 5" loading="lazy">
                     <div class="gallery-overlay"><i>🔍</i></div>
                 </div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="500" data-src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800">
-                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600" alt="Campo" loading="lazy">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="500" data-src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600" alt="Costa Chilena 6" loading="lazy">
                     <div class="gallery-overlay"><i>🔍</i></div>
                 </div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="600" data-src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800">
-                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600" alt="Río" loading="lazy">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="600" data-src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800">
+                    <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800" alt="Costa Chilena 7" loading="lazy">
                     <div class="gallery-overlay"><i>🔍</i></div>
                 </div>
-                <div class="gallery-item large" data-aos="fade-up" data-aos-delay="700" data-src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800">
-                    <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800" alt="Paisaje" loading="lazy">
+                <div class="gallery-item large" data-aos="fade-up" data-aos-delay="700" data-src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=600">
+                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=600" alt="Costa Chilena 8" loading="lazy">
                     <div class="gallery-overlay"><i>🔍</i></div>
                 </div>
             </div>
@@ -1474,6 +1702,94 @@
             <img class="lightbox-img" src="" alt="Lightbox image">
         </div>
     </div>
+
+    <!-- Proceso Section -->
+    <section id="proceso" class="section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>¿Cómo comprar tu lote?</h2>
+                <p>Un proceso simple, transparente y seguro.</p>
+            </div>
+            <div class="proceso-timeline">
+                <div class="proceso-step" data-aos="fade-up" data-aos-delay="0">
+                    <div class="step-icon-wrap">📋</div>
+                    <h3>Reserva tu lote</h3>
+                    <p>Elige tu lote, completa el formulario y paga la reserva (UF 10). Tu lote queda apartado por 10 días.</p>
+                </div>
+                <div class="proceso-step" data-aos="fade-up" data-aos-delay="150">
+                    <div class="step-icon-wrap">📝</div>
+                    <h3>Firma la promesa</h3>
+                    <p>Firmamos la promesa de compraventa ante notario. Se abona el 20% del valor total del lote.</p>
+                </div>
+                <div class="proceso-step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-icon-wrap">🏦</div>
+                    <h3>Financiamiento</h3>
+                    <p>Puedes optar a crédito hipotecario o pago al contado. Te asesoramos con bancos asociados.</p>
+                </div>
+                <div class="proceso-step" data-aos="fade-up" data-aos-delay="450">
+                    <div class="step-icon-wrap">🔑</div>
+                    <h3>Escritura y entrega</h3>
+                    <p>Escritura ante notario, inscripción en el Conservador de Bienes Raíces de Quintero. ¡El lote es tuyo!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Preguntas frecuentes</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <h4>¿Se puede financiar con crédito hipotecario?</h4>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí. Los terrenos de Costa Mantagua son elegibles para crédito hipotecario en los principales bancos chilenos (Banco Estado, BCI, Santander). Te conectamos con un ejecutivo para pre-evaluar tu caso sin costo.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <h4>¿Puedo construir de inmediato?</h4>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí. El proyecto cuenta con recepción municipal y los lotes tienen factibilidad de agua y electricidad. Puedes iniciar el trámite de permiso de edificación ante la Municipalidad de Quintero una vez inscrito el dominio.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <h4>¿Cuánto tiempo toma el proceso de compra?</h4>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>En promedio 30 a 45 días desde la reserva hasta la inscripción en el Conservador de Bienes Raíces. El plazo puede variar según la institución financiera si hay crédito hipotecario.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <h4>¿Los precios en UF están sujetos a cambio?</h4>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Los precios publicados son referenciales y se actualizan mensualmente. El precio definitivo se fija en la promesa de compraventa y queda congelado desde ese momento.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <h4>¿Hay restricciones de uso del suelo?</h4>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Los lotes son de uso residencial. Se permite construir casa habitación, piscina y dependencias. No se permiten actividades comerciales, agrícolas intensivas ni subdivisión posterior sin aprobación municipal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Ubicación Section -->
     <section id="ubicacion" class="ubicacion-section section-padding">
@@ -1508,8 +1824,8 @@
             <div class="invertir-grid">
                 <div class="invertir-card" data-aos="fade-up">
                     <span class="invertir-icon">📈</span>
-                    <h3>Plusvalía garantizada</h3>
-                    <p>La V Región es la zona de mayor crecimiento inmobiliario fuera de Santiago. Mantagua ha triplicado su valor en 10 años.</p>
+                    <h3>Alta plusvalía histórica</h3>
+                    <p>La zona costera de la V Región registra una de las mayores tasas de plusvalía fuera de Santiago, impulsada por la demanda de segunda vivienda y el turismo.</p>
                 </div>
                 <div class="invertir-card" data-aos="fade-up" data-aos-delay="100">
                     <span class="invertir-icon">🏖️</span>
@@ -1586,8 +1902,8 @@
                     <h2>¿Interesado en un lote? <br> Conversemos hoy.</h2>
                     <p>Nuestros ejecutivos te contactan en menos de 24 horas.</p>
                     <div class="contacto-details">
-                        <div class="detail-item"><span>📞</span> +56 9 XXXX XXXX</div>
-                        <div class="detail-item"><span>📧</span> ventas@costamantagua.cl</div>
+                        <div class="detail-item"><span>📞</span> <a href="tel:+56987654321" class="tel-link">+56 9 8765 4321</a></div>
+                        <div class="detail-item"><span>📧</span> <a href="mailto:ventas@costamantagua.cl">ventas@costamantagua.cl</a></div>
                         <div class="detail-item"><span>📍</span> Oficina en Quintero, V Región</div>
                     </div>
                     <div style="padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.9rem; opacity: 0.8;">
@@ -1651,6 +1967,49 @@
     </section>
 
     <!-- Footer -->
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/56987654321?text=Hola%2C%20me%20interesan%20las%20parcelas%20de%20Costa%20Mantagua" class="whatsapp-float" target="_blank">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" style="background: white;">&times;</span>
+            <div class="video-container">
+                <iframe src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-modal" class="modal">
+        <div class="modal-legal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Política de Privacidad</h2>
+            <p>En Costa Mantagua, nos tomamos muy en serio la protección de sus datos personales. La información recopilada a través de nuestros formularios (nombre, correo electrónico y teléfono) se utiliza exclusivamente para responder a sus consultas inmobiliarias y proporcionarle información sobre nuestro proyecto.</p>
+            <p>Sus datos no son compartidos, vendidos ni cedidos a terceros bajo ninguna circunstancia. El tratamiento de la información se realiza en estricto cumplimiento con la <strong>Ley 19.628 sobre Protección de la Vida Privada</strong> de la República de Chile.</p>
+            <p>Usted tiene derecho a solicitar la modificación o eliminación de sus datos de nuestra base de datos en cualquier momento enviando un correo electrónico a <a href="mailto:ventas@costamantagua.cl">ventas@costamantagua.cl</a>.</p>
+            <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.7;">Última actualización: Enero 2026</p>
+        </div>
+    </div>
+
+    <!-- Terms and Conditions Modal -->
+    <div id="terms-modal" class="modal">
+        <div class="modal-legal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Términos y Condiciones</h2>
+            <p>El uso de este sitio web y la información contenida en él se rigen por los siguientes términos:</p>
+            <p><strong>Información Referencial:</strong> Los precios de los lotes se expresan en Unidades de Fomento (UF) y son meramente referenciales. El precio final y definitivo se estipulará en la respectiva promesa de compraventa firmada ante notario.</p>
+            <p><strong>Disponibilidad:</strong> La disponibilidad de los lotes mostrada en el sitio es referencial y debe ser confirmada directamente con nuestros ejecutivos de venta.</p>
+            <p><strong>Imágenes Ilustrativas:</strong> Las imágenes y fotografías utilizadas son de carácter ilustrativo (stock fotográfico de Unsplash) y buscan representar el entorno natural del proyecto. El estado real del terreno puede variar.</p>
+            <p><strong>Aprobaciones:</strong> El desarrollo del proyecto se rige por las normativas vigentes y está sujeto a las aprobaciones municipales finales de la Ilustre Municipalidad de Quintero.</p>
+            <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.7;">Última actualización: Enero 2026</p>
+        </div>
+    </div>
+
     <footer>
         <div class="container">
             <div class="footer-grid">
@@ -1675,15 +2034,15 @@
                 <div>
                     <h4 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 25px; font-family: 'Playfair Display', serif;">Legal</h4>
                     <div style="display: flex; flex-direction: column; gap: 12px;">
-                        <a href="#" class="footer-link" style="opacity: 0.7; font-size: 0.9rem;">Términos y condiciones</a>
-                        <a href="#" class="footer-link" style="opacity: 0.7; font-size: 0.9rem;">Política de privacidad</a>
+                        <a href="javascript:void(0)" id="link-terms" class="footer-link" style="opacity: 0.7; font-size: 0.9rem;">Términos y condiciones</a>
+                        <a href="javascript:void(0)" id="link-privacy" class="footer-link" style="opacity: 0.7; font-size: 0.9rem;">Política de privacidad</a>
                     </div>
                 </div>
                 <div>
                     <h4 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 25px; font-family: 'Playfair Display', serif;">Contacto</h4>
                     <div style="display: flex; flex-direction: column; gap: 12px;">
-                        <span style="opacity: 0.7; font-size: 0.9rem;">+56 9 XXXX XXXX</span>
-                        <span style="opacity: 0.7; font-size: 0.9rem;">ventas@costamantagua.cl</span>
+                        <span style="opacity: 0.7; font-size: 0.9rem;"><a href="tel:+56987654321">+56 9 8765 4321</a></span>
+                        <span style="opacity: 0.7; font-size: 0.9rem;"><a href="mailto:ventas@costamantagua.cl">ventas@costamantagua.cl</a></span>
                         <span style="opacity: 0.7; font-size: 0.9rem;">Quintero, V Región, Chile</span>
                     </div>
                 </div>
@@ -1766,13 +2125,13 @@
                 if (entry.isIntersecting) {
                     const target = +entry.target.getAttribute('data-target');
                     let current = 0;
-                    const speed = 200;
+                    const speed = 100;
                     const inc = target / speed;
                     const update = () => {
                         if (current < target) {
                             current += inc;
                             entry.target.innerText = Math.ceil(current);
-                            setTimeout(update, 1);
+                            setTimeout(update, 10);
                         } else {
                             entry.target.innerText = target;
                         }
@@ -1781,8 +2140,22 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 1 });
+        }, { threshold: 0.3 });
         document.querySelectorAll('.counter').forEach(c => counterObserver.observe(c));
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
 
         // Lotes Filter
         document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -1815,7 +2188,7 @@
             } else if (field.type === 'email' && field.value.trim()) {
                 const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 isValid = re.test(field.value.trim());
-            } else if (field.id === 'phone' && field.value.trim()) {
+            } else if ((field.id === 'phone' || field.id === 'modal-phone') && field.value.trim()) {
                 // Chileno: +56 9 XXXX XXXX o 9 XXXX XXXX
                 const re = /^(\+56\s?9|9)\s?\d{4}\s?\d{4}$/;
                 isValid = re.test(field.value.trim());
@@ -1859,13 +2232,15 @@
                 });
                 if (isFormValid) {
                     const submitBtn = form.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerText;
                     submitBtn.innerText = 'Enviando...';
                     submitBtn.disabled = true;
                     setTimeout(() => {
                         form.style.display = 'none';
-                        const successMsg = document.getElementById('success-message');
-                        if (successMsg) successMsg.style.display = 'block';
-                        if (formId === 'modal-contact-form') {
+                        if (formId === 'main-contact-form') {
+                            const successMsg = document.getElementById('success-message');
+                            if (successMsg) successMsg.style.display = 'block';
+                        } else if (formId === 'modal-contact-form') {
                              form.parentElement.innerHTML = '<div style="text-align:center; padding: 20px;"><div class="checkmark">✓</div><h3>¡Gracias!</h3><p>Te contactaremos pronto por este lote.</p></div>';
                         }
                     }, 1500);
@@ -1894,20 +2269,58 @@
             pagination: { el: '.swiper-pagination', clickable: true }
         });
 
-        // Modals & Lightbox
-        const modal = document.getElementById('lote-modal');
+        // Modals Logic
+        const closeAllModals = () => {
+            document.querySelectorAll('.modal').forEach(m => {
+                m.style.display = 'none';
+                if (m.id === 'video-modal') {
+                    m.querySelector('iframe').src = '';
+                }
+            });
+            document.body.style.overflow = 'auto';
+        };
+
+        document.querySelectorAll('.modal-close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', closeAllModals);
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                closeAllModals();
+            }
+        });
+
+        // Lote Modal
+        const loteModal = document.getElementById('lote-modal');
         document.querySelectorAll('.btn-detalle').forEach(btn => {
             btn.addEventListener('click', () => {
                 const id = btn.getAttribute('data-lote');
                 document.getElementById('modal-lote-title').innerText = 'Lote ' + id;
                 document.getElementById('modal-lote-input').value = 'Lote ' + id;
-                modal.style.display = 'flex';
+                loteModal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
             });
         });
-        document.querySelector('.modal-close').addEventListener('click', () => {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
+
+        // Video Modal
+        const videoModal = document.getElementById('video-modal');
+        const videoIframe = videoModal.querySelector('iframe');
+        document.getElementById('btn-video').addEventListener('click', () => {
+            videoIframe.src = "https://www.youtube.com/embed/UElBp_iLMPY?autoplay=1&rel=0";
+            videoModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Legal Modals
+        const privacyModal = document.getElementById('privacy-modal');
+        const termsModal = document.getElementById('terms-modal');
+        document.getElementById('link-privacy').addEventListener('click', () => {
+            privacyModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+        document.getElementById('link-terms').addEventListener('click', () => {
+            termsModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         });
 
         const lightbox = document.getElementById('lightbox');
