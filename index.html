@@ -56,7 +56,7 @@
             --error: #e53e3e;
             --negro-overlay: rgba(27, 67, 50, 0.7);
             --transparente-overlay: rgba(27, 67, 50, 0.2);
-            --transition: all 0.3s ease;
+            --transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         * {
@@ -75,6 +75,21 @@
             background-color: var(--blanco);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Grain Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            z-index: 9999;
         }
 
         h1, h2, h3, .playfair {
@@ -116,7 +131,9 @@
             font-weight: 600;
             margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.15em;
+            backdrop-filter: blur(15px);
+            border: 0.5px solid rgba(255, 255, 255, 0.3);
         }
 
         .btn {
@@ -268,7 +285,7 @@
         .logo-sub {
             font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 0.15em;
             color: var(--blanco);
             opacity: 0.8;
             text-shadow: 0 1px 4px rgba(0,0,0,0.5);
@@ -356,10 +373,25 @@
             text-align: center;
             color: var(--blanco);
             overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            z-index: 0;
+            animation: kenBurns 20s linear infinite alternate;
+            will-change: transform;
+        }
+
+        @keyframes kenBurns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
         }
 
         .hero::before {
@@ -409,6 +441,27 @@
             margin-bottom: 20px;
             line-height: 1.1;
             text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .split-line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .split-word {
+            display: inline-block;
+            transform: translateY(110%);
+            transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+            will-change: transform;
+        }
+
+        .split-line:nth-child(2) .split-word {
+            transition-delay: 0.15s;
+        }
+
+        .hero h1.revealed .split-word {
+            transform: translateY(0);
         }
 
         .hero p {
@@ -556,10 +609,25 @@
             border: 1px solid var(--dorado);
         }
 
-        .section-header h2 {
+        .section-header h2, .proyecto-content h2, .ubicacion-info h2, .contacto-info h2 {
             font-size: clamp(2rem, 5vw, 3rem);
             color: var(--verde-bosque);
             margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .reveal-text {
+            display: block;
+            transform: translateY(110%);
+            transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+            will-change: transform;
+        }
+
+        .reveal-text:nth-child(2) { transition-delay: 0.1s; }
+        .reveal-text:nth-child(3) { transition-delay: 0.2s; }
+
+        .revealed .reveal-text {
+            transform: translateY(0);
         }
 
         .lotes-filter {
@@ -591,15 +659,28 @@
             gap: 30px;
         }
 
+        .lotes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            transition: opacity 0.4s ease;
+        }
+
+        .lotes-grid.filtering {
+            opacity: 0;
+        }
+
         .lote-card {
             background: var(--blanco);
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, opacity 0.3s ease;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+                        box-shadow 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+                        border 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
             border: 2px solid transparent;
             position: relative;
-            opacity: 1;
+            will-change: transform;
         }
 
         .lote-card:hover {
@@ -627,6 +708,7 @@
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.15em;
         }
 
         .status-disponible { background: #e8f5e9; color: #2e7d32; }
@@ -718,9 +800,18 @@
 
         .gallery-item img {
             width: 100%;
-            height: 100%;
+            height: 130%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            will-change: transform;
+            position: absolute;
+            top: -15%;
+            left: 0;
+            transform: translateY(var(--parallax-y, 0));
+        }
+
+        .gallery-item:hover img {
+            transform: translateY(var(--parallax-y, 0)) scale(1.05);
         }
 
         .gallery-overlay {
@@ -811,6 +902,7 @@
             height: 100%;
             width: 100%;
             z-index: 1;
+            filter: grayscale(1) invert(1) opacity(0.8) sepia(100%) hue-rotate(100deg) saturate(200%);
         }
 
         /* Por Qué Invertir Section */
@@ -1029,11 +1121,13 @@
         }
 
         .contacto-form-card {
-            background: var(--blanco);
+            background: rgba(255, 255, 255, 0.85);
             padding: 50px;
             border-radius: 20px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.2);
             color: var(--gris-oscuro);
+            backdrop-filter: blur(15px);
+            border: 0.5px solid rgba(255, 255, 255, 0.5);
         }
 
         /* Formulario con Validación Visual */
@@ -1167,7 +1261,7 @@
         }
 
         .modal-content {
-            background: var(--blanco);
+            background: rgba(255, 255, 255, 0.95);
             max-width: 800px;
             width: 100%;
             border-radius: 20px;
@@ -1175,6 +1269,8 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             position: relative;
+            backdrop-filter: blur(15px);
+            border: 0.5px solid rgba(255, 255, 255, 0.5);
         }
 
         .modal-close {
@@ -1420,9 +1516,13 @@
 
     <!-- Hero Section -->
     <header class="hero">
+        <div class="hero-bg"></div>
         <div id="particles-container"></div>
-        <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-            <h1>Tu parcela en <br> Mantagua te espera</h1>
+        <div class="hero-content">
+            <h1 id="hero-title">
+                <span class="split-line"><span class="split-word">Tu parcela en</span></span>
+                <span class="split-line"><span class="split-word">Mantagua te espera</span></span>
+            </h1>
             <p>Loteos residenciales a minutos del mar. Naturaleza, tranquilidad e inversión segura en la Quinta Región.</p>
             <div class="hero-btns">
                 <a href="#lotes" class="btn btn-primary">Ver lotes disponibles →</a>
@@ -1456,9 +1556,9 @@
     <section id="proyecto" class="section-padding">
         <div class="container">
             <div class="proyecto-grid">
-                <div class="proyecto-content" data-aos="fade-right">
+                <div class="proyecto-content">
                     <span class="badge" style="background: rgba(45, 106, 79, 0.1); color: var(--verde-medio); border: 1px solid var(--verde-medio);">Sobre el proyecto</span>
-                    <h2>Vive rodeado de <br> naturaleza en Mantagua</h2>
+                    <h2><span class="reveal-text">Vive rodeado de</span><span class="reveal-text">naturaleza en Mantagua</span></h2>
                     <p>Mantagua es uno de los últimos rincones vírgenes de la costa central chilena. A solo 8 minutos de la playa y 90 minutos de Santiago, nuestro proyecto ofrece lotes residenciales en un entorno natural privilegiado, con todos los servicios y la tranquilidad que buscas.</p>
 
                     <div class="features-grid">
@@ -1493,9 +1593,9 @@
     <!-- Lotes Section -->
     <section id="lotes" class="lotes-section section-padding">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <span class="badge">Lotes disponibles</span>
-                <h2>Encuentra tu lote ideal</h2>
+                <h2><span class="reveal-text">Encuentra tu</span><span class="reveal-text">lote ideal</span></h2>
                 <p>24 lotes residenciales con distintos tamaños y orientaciones</p>
             </div>
 
@@ -1651,8 +1751,8 @@
     <!-- Galería Section -->
     <section id="galeria" class="section-padding">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2>El entorno natural</h2>
+            <div class="section-header">
+                <h2><span class="reveal-text">El entorno natural</span></h2>
                 <p>Conoce el paisaje que te rodeará cada día</p>
             </div>
 
@@ -1706,8 +1806,8 @@
     <!-- Proceso Section -->
     <section id="proceso" class="section-padding">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2>¿Cómo comprar tu lote?</h2>
+            <div class="section-header">
+                <h2><span class="reveal-text">¿Cómo comprar</span><span class="reveal-text">tu lote?</span></h2>
                 <p>Un proceso simple, transparente y seguro.</p>
             </div>
             <div class="proceso-timeline">
@@ -1738,8 +1838,8 @@
     <!-- FAQ Section -->
     <section id="faq" class="faq-section section-padding">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Preguntas frecuentes</h2>
+            <div class="section-header">
+                <h2><span class="reveal-text">Preguntas frecuentes</span></h2>
             </div>
             <div class="faq-container">
                 <div class="faq-item" data-aos="fade-up">
@@ -1795,9 +1895,9 @@
     <section id="ubicacion" class="ubicacion-section section-padding">
         <div class="container">
             <div class="ubicacion-grid">
-                <div class="ubicacion-info" data-aos="fade-right">
+                <div class="ubicacion-info">
                     <span class="badge" style="background: rgba(255,255,255,0.1); color: var(--blanco); border: 1px solid var(--blanco);">Ubicación privilegiada</span>
-                    <h2>En el corazón <br> de Mantagua</h2>
+                    <h2><span class="reveal-text">En el corazón</span><span class="reveal-text">de Mantagua</span></h2>
                     <div class="ubicacion-list">
                         <div class="ubicacion-list-item"><span>📍</span> Mantagua, Quintero, V Región</div>
                         <div class="ubicacion-list-item"><span>🚗</span> 90 min desde Santiago</div>
@@ -1818,8 +1918,8 @@
     <!-- Por Qué Invertir Section -->
     <section class="section-padding">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2>¿Por qué invertir en Costa Mantagua?</h2>
+            <div class="section-header">
+                <h2><span class="reveal-text">¿Por qué invertir</span><span class="reveal-text">en Costa Mantagua?</span></h2>
             </div>
             <div class="invertir-grid">
                 <div class="invertir-card" data-aos="fade-up">
@@ -1844,8 +1944,8 @@
     <!-- Testimonios Section -->
     <section class="testimonios-section section-padding">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Lo que dicen nuestros clientes</h2>
+            <div class="section-header">
+                <h2><span class="reveal-text">Lo que dicen</span><span class="reveal-text">nuestros clientes</span></h2>
             </div>
             <div class="swiper" data-aos="fade-up">
                 <div class="swiper-wrapper">
@@ -1898,8 +1998,8 @@
     <section id="contacto" class="contacto-section section-padding">
         <div class="container">
             <div class="contacto-grid">
-                <div class="contacto-info" data-aos="fade-right">
-                    <h2>¿Interesado en un lote? <br> Conversemos hoy.</h2>
+                <div class="contacto-info">
+                    <h2><span class="reveal-text">¿Interesado en un lote?</span><span class="reveal-text">Conversemos hoy.</span></h2>
                     <p>Nuestros ejecutivos te contactan en menos de 24 horas.</p>
                     <div class="contacto-details">
                         <div class="detail-item"><span>📞</span> <a href="tel:+56987654321" class="tel-link">+56 9 8765 4321</a></div>
@@ -2065,6 +2165,10 @@
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loading-screen').classList.add('hidden');
+                // Trigger hero title reveal
+                setTimeout(() => {
+                    document.getElementById('hero-title').classList.add('revealed');
+                }, 300);
             }, 1500);
         });
 
@@ -2157,23 +2261,63 @@
             });
         });
 
-        // Lotes Filter
+        // Lotes Filter with Cross-fade
+        const lotesGrid = document.querySelector('.lotes-grid');
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter');
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                const filter = btn.getAttribute('data-filter');
-                document.querySelectorAll('.lote-card').forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-status') === filter) {
-                        card.style.display = 'block';
-                        setTimeout(() => card.style.opacity = '1', 10);
-                    } else {
-                        card.style.opacity = '0';
-                        setTimeout(() => card.style.display = 'none', 300);
-                    }
-                });
+
+                lotesGrid.classList.add('filtering');
+
+                setTimeout(() => {
+                    document.querySelectorAll('.lote-card').forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-status') === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    lotesGrid.classList.remove('filtering');
+                }, 400);
             });
         });
+
+        // Gallery Internal Parallax
+        const parallaxObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                } else {
+                    entry.target.classList.remove('in-view');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.gallery-item').forEach(item => parallaxObserver.observe(item));
+
+        window.addEventListener('scroll', () => {
+            const galleryImages = document.querySelectorAll('.gallery-item.in-view img');
+            galleryImages.forEach(img => {
+                const rect = img.parentElement.getBoundingClientRect();
+                const viewHeight = window.innerHeight;
+                const percentage = (viewHeight - rect.top) / (viewHeight + rect.height);
+                const move = (percentage - 0.5) * 60; // Up to 60px movement
+                img.style.setProperty('--parallax-y', `${move}px`);
+            });
+        });
+
+        // Reveal Text on Scroll
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.section-header, .proyecto-content, .ubicacion-info, .contacto-info').forEach(el => revealObserver.observe(el));
 
         // Validation Logic
         const validateField = (field) => {
@@ -2252,7 +2396,9 @@
 
         // Map init
         const map = L.map('map', { scrollWheelZoom: false }).setView([-32.7833, -71.4500], 13);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://carto.com/">CARTO</a>'
+        }).addTo(map);
         const greenIcon = L.divIcon({
             className: 'custom-div-icon',
             html: "<div style='background-color:#1B4332; width:30px; height:30px; border-radius:50%; border:2px solid #C9A84C; display:flex; align-items:center; justify-content:center; color:white; font-size:15px;'>🌿</div>",
@@ -2262,7 +2408,11 @@
         L.circle([-32.7833, -71.4500], { color: '#52B788', fillOpacity: 0.2, radius: 500 }).addTo(map);
 
         // AOS & Swiper
-        AOS.init({ duration: 800, once: true });
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
         new Swiper('.swiper', {
             loop: true,
             autoplay: { delay: 5000 },
@@ -2369,6 +2519,20 @@
                 lightbox.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
+        });
+
+        // Magnetic Pull Effect
+        const magneticButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
+        magneticButtons.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = `translate(0, 0)`;
+            });
         });
 
         // Ripple Effect
