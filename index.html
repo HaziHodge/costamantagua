@@ -116,7 +116,7 @@
             transition: transform 1.2s var(--transition-premium);
             will-change: transform;
         }
-        .active .reveal-text { transform: translateY(0); }
+        .reveal-container.active .reveal-text { transform: translateY(0); }
 
         /* 6. NAVBAR */
         nav {
@@ -134,7 +134,7 @@
         .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .logo-text { color: var(--blanco); transition: color 0.3s; }
         .logo-text h2 { font-size: 1.5rem; font-weight: 800; }
-        .logo-text span { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; display: block; }
+        .logo-text span { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; display: block; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
 
         .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-link {
@@ -183,9 +183,13 @@
             justify-content: flex-start; padding-top: 15vh;
             width: 100%; height: 100%; position: relative; z-index: 1;
         }
-        .hero h1 { font-size: 5.5rem; line-height: 1.3; margin-bottom: 2rem; max-width: 900px; text-shadow: 2px 4px 10px rgba(0,0,0,0.3); }
+        .hero h1 {
+            font-size: 5rem; line-height: 1.3; margin-bottom: 2.5rem;
+            max-width: 950px; text-shadow: 2px 4px 10px rgba(0,0,0,0.3);
+            display: block;
+        }
         .hero p { font-size: 1.2rem; max-width: 600px; opacity: 0.9; margin-bottom: 40px; }
-        .hero-actions { margin-bottom: 4rem; }
+        .hero-actions { margin-bottom: 50px; }
 
         /* Partículas */
         .particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
@@ -193,10 +197,10 @@
         @keyframes float { from { transform: translateY(0) rotate(0deg); opacity: 0; } 50% { opacity: 0.5; } to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
 
         .hero-stats {
-            display: flex; gap: 40px; margin-top: 60px;
+            display: flex; gap: 40px; margin-top: auto;
             backdrop-filter: blur(10px); background: rgba(255,255,255,0.1);
             padding: 20px 40px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.2);
-            position: relative;
+            position: relative; z-index: 5;
         }
         .stat-item { display: flex; flex-direction: column; align-items: center; }
         .stat-val { font-size: 1.5rem; font-weight: 700; font-family: 'Playfair Display', serif; color: var(--dorado); }
@@ -403,8 +407,9 @@
         <div class="hero-bg"></div>
         <div class="particles" id="particles"></div>
         <div class="hero-content">
-            <div class="reveal-container"><h1 class="reveal-text">Tu parcela en<br>Costa Mantagua</h1></div>
-            <div class="reveal-container"><p class="reveal-text">Naturaleza, exclusividad e inversión segura en el corazón de la Quinta Región.</p></div>
+            <div class="reveal-container">
+                <h1 class="reveal-text">Naturaleza, exclusividad e inversión segura en el corazón de la Quinta Región</h1>
+            </div>
             <div class="hero-actions" data-aos="fade-up" data-aos-delay="600">
                 <a href="#lotes" class="btn-cta btn-primary">Ver lotes disponibles →</a>
                 <button class="btn-cta btn-outline" style="margin-left: 20px;" onclick="openVideo('P_N384C6PGA')">▶ Ver el proyecto</button>
@@ -424,6 +429,11 @@
                     <svg class="stat-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                     <span class="stat-val" data-target="8">0</span><span class="stat-label">8 Min al mar</span>
                 </div>
+                <div style="width: 1px; background: rgba(255,255,255,0.2);"></div>
+                <div class="stat-item">
+                    <svg class="stat-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    <span class="stat-val">100%</span><span class="stat-label">Naturaleza total</span>
+                </div>
             </div>
         </div>
         <a href="#proyecto" class="scroll-down">
@@ -441,10 +451,30 @@
                     Costa Mantagua es uno de los últimos rincones vírgenes de la costa central chilena. A solo 8 minutos de la playa y 90 minutos de Santiago, ofrecemos lotes residenciales en un entorno natural privilegiado, con todos los servicios y la tranquilidad que buscas.
                 </p>
                 <div class="feature-list">
-                    <div class="feature-item"><div class="feature-icon">🌊</div> A 8 min del mar</div>
-                    <div class="feature-item"><div class="feature-icon">🏔️</div> Vista a cerros</div>
-                    <div class="feature-item"><div class="feature-icon">🌳</div> Áreas comunes</div>
-                    <div class="feature-item"><div class="feature-icon">⚡</div> Luz y Agua</div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="2"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.5 0 2.5 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.5 0 2.5 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.5 0 2.5 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
+                        </div>
+                        A 8 min del mar
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="2"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+                        </div>
+                        Vista a cerros
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="2"><path d="M12 20V10"/><path d="M18 10c0-4.418-2.686-8-6-8s-6 3.582-6 8a8 8 0 0 0 3.328 6.607C10.158 17.5 12 19 12 19s1.842-1.5 2.672-2.393A8 8 0 0 0 18 10z"/></svg>
+                        </div>
+                        Áreas comunes
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        </div>
+                        Luz y Agua
+                    </div>
                 </div>
             </div>
             <div class="image-reveal" data-aos="zoom-in">
@@ -497,6 +527,7 @@
             <button class="filter-btn" data-filter="reservado">Reservados</button>
         </div>
         <div class="lotes-grid">
+            <!-- Card 1 -->
             <div class="lote-card disponible" data-aos="fade-up">
                 <div class="lote-img">📐<span class="lote-status status-disponible">DISPONIBLE</span></div>
                 <div class="lote-info">
@@ -506,16 +537,53 @@
                     <button class="btn-detail" onclick="openModal('Lote A-01', '850')">Ver detalle →</button>
                 </div>
             </div>
-            <div class="lote-card reservado" data-aos="fade-up">
+            <!-- Card 2 -->
+            <div class="lote-card disponible" data-aos="fade-up" data-aos-delay="100">
+                <div class="lote-img">📐<span class="lote-status status-disponible">DISPONIBLE</span></div>
+                <div class="lote-info">
+                    <h3>Lote A-02</h3>
+                    <div class="lote-meta"><span>620 m²</span> <span>Desde UF 2.400</span></div>
+                    <div class="lote-tags"><span class="tag">Arbolado</span><span class="tag">Servicios</span></div>
+                    <button class="btn-detail" onclick="openModal('Lote A-02', '620')">Ver detalle →</button>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="lote-card reservado" data-aos="fade-up" data-aos-delay="200">
                 <div class="lote-overlay"><div class="reservado-label">RESERVADO</div></div>
                 <div class="lote-img">📐<span class="lote-status status-reservado">RESERVADO</span></div>
-                <div class="lote-info"><h3>Lote B-01</h3><div class="lote-meta"><span>1.200 m²</span></div></div>
+                <div class="lote-info">
+                    <h3>Lote B-01</h3>
+                    <div class="lote-meta"><span>1.200 m²</span></div>
+                    <button class="btn-detail" disabled style="opacity: 0.5;">No disponible</button>
+                </div>
             </div>
-            <div class="lote-card disponible" data-aos="fade-up">
+            <!-- Card 4 -->
+            <div class="lote-card disponible" data-aos="fade-up" data-aos-delay="300">
+                <div class="lote-img">📐<span class="lote-status status-disponible">DISPONIBLE</span></div>
+                <div class="lote-info">
+                    <h3>Lote B-02</h3>
+                    <div class="lote-meta"><span>750 m²</span> <span>Desde UF 2.400</span></div>
+                    <div class="lote-tags"><span class="tag">Vista Cerros</span></div>
+                    <button class="btn-detail" onclick="openModal('Lote B-02', '750')">Ver detalle →</button>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="lote-card disponible" data-aos="fade-up" data-aos-delay="400">
+                <div class="lote-img">📐<span class="lote-status status-disponible">DISPONIBLE</span></div>
+                <div class="lote-info">
+                    <h3>Lote C-01</h3>
+                    <div class="lote-meta"><span>500 m²</span> <span>Desde UF 2.400</span></div>
+                    <div class="lote-tags"><span class="tag">Plano</span><span class="tag">Tranquilo</span></div>
+                    <button class="btn-detail" onclick="openModal('Lote C-01', '500')">Ver detalle →</button>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="lote-card disponible" data-aos="fade-up" data-aos-delay="500">
                 <div class="lote-img">📐<span class="lote-status status-disponible">DISPONIBLE</span></div>
                 <div class="lote-info">
                     <h3>Lote C-02</h3>
                     <div class="lote-meta"><span>980 m²</span> <span>Desde UF 2.400</span></div>
+                    <div class="lote-tags"><span class="tag">Premium</span><span class="tag">Vista</span></div>
                     <button class="btn-detail" onclick="openModal('Lote C-02', '980')">Ver detalle →</button>
                 </div>
             </div>
@@ -685,7 +753,11 @@
                 <p><a href="javascript:void(0)" onclick="openLegal('terminos')" style="color:inherit; text-decoration:none;">Términos y condiciones</a></p>
                 <p><a href="javascript:void(0)" onclick="openLegal('privacidad')" style="color:inherit; text-decoration:none;">Política de privacidad</a></p>
             </div>
-            <div><h4>Ubicación</h4><p>Mantagua, V Región</p></div>
+            <div><h4>Contacto</h4>
+                <p><a href="tel:+56987654321" style="color:inherit; text-decoration:none;">📞 +56 9 8765 4321</a></p>
+                <p><a href="mailto:ventas@costamantagua.cl" style="color:inherit; text-decoration:none;">📧 ventas@costamantagua.cl</a></p>
+                <p>📍 Mantagua, V Región</p>
+            </div>
         </div>
         <div class="footer-bottom">© 2026 Costa Mantagua Parcelas Exclusivas.</div>
     </footer>
@@ -739,7 +811,7 @@
     </div>
 
     <!-- WhatsApp -->
-    <a href="https://wa.me/56987654321" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/56987654321" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12.031 6.172c-2.32 0-4.519.903-6.16 2.544-1.64 1.64-2.543 3.838-2.543 6.158 0 1.299.28 2.57.823 3.73l-1.076 3.928 4.02-1.055c1.12.577 2.373.882 3.655.882 2.32 0 4.519-.903 6.16-2.544 1.64-1.64 2.543-3.839 2.543-6.158s-.903-4.518-2.543-6.158c-1.64-1.64-3.84-2.543-6.16-2.543zm5.42 10.42c-.243.682-1.462 1.24-2.042 1.318-.58.077-1.103.1-.314-.232-.733-.312-3.115-1.373-3.115-1.373-.133-.06-.24-.136-.324-.225-.26-.277-.38-.633-.338-1.01.03-.27.13-.532.296-.757 0 0 .044-.06.07-.09.027-.03.05-.058.07-.083.076-.086.13-.13.13-.13.165-.178.434-.188.614-.027 0 0 .425.432.554.58.13.146.13.243.03.434-.097.193-.097.31-.03.433.065.122.257.433.553.7.437.4 1.054.665 1.547.785.493.12 1.15.114 1.543-.19.193-.15.425-.512.553-.7.13-.19.13-.31 0-.434-.13-.122-.843-.513-.843-.513-.194-.12-.323-.12-.518 0-.195.12-.29.19-.485.41-.194.225-.26.26-.453.122-.194-.137-.816-.312-1.554-.98-.57-.514-.955-1.15-1.066-1.36-.11-.213-.01-.326.095-.432.096-.096.194-.225.29-.338.097-.113.13-.193.194-.323.065-.13.033-.242-.016-.34-.05-.095-.453-1.096-.615-1.49-.16-.395-.323-.334-.453-.334s-.26 0-.422.016c-.162.016-.422.08-.65.32-.224.24-.87.854-.87 2.084s.896 2.416 1.025 2.59c.125.176 1.764 2.693 4.274 3.774.59.256 1.05.41 1.41.524.598.19 1.143.163 1.57.098.48-.073 1.464-.598 1.673-1.176.21-.578.21-1.07.147-1.176-.063-.106-.23-.17-.486-.296z"/></svg>
     </a>
 
@@ -754,6 +826,20 @@
             loading.style.opacity = '0';
             setTimeout(() => loading.style.display = 'none', 800);
             AOS.init({ duration: 800, once: true });
+
+            // Split-text Reveal Observer
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal-container').forEach(container => {
+                revealObserver.observe(container);
+            });
 
             // Initialize Swiper
             new Swiper('.swiper', {
