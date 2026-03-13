@@ -3,14 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mantagua Parcelas Exclusivas | Loteos Residenciales V Región Chile</title>
-    <meta name="description" content="Lotes residenciales en Mantagua, Quintero. A 8 minutos del mar y 90 de Santiago.">
+    <title>Costa Mantagua Parcelas Exclusivas | Loteos Residenciales V Región Chile</title>
+    <meta name="description" content="Lotes residenciales en Costa Mantagua, Quintero. A 8 minutos del mar y 90 de Santiago.">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Mantagua Parcelas Exclusivas">
-    <meta property="og:description" content="Tu parcela en Mantagua te espera. Naturaleza, tranquilidad e inversión segura.">
+    <meta property="og:title" content="Costa Mantagua Parcelas Exclusivas">
+    <meta property="og:description" content="Tu parcela en Costa Mantagua te espera. Naturaleza, tranquilidad e inversión segura.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200">
     <meta property="og:type" content="website">
+
+    <!-- SEO — SCHEMA MARKUP JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateListing",
+      "@id": "https://costamantagua.cl",
+      "name": "Costa Mantagua",
+      "description": "Lotes residenciales en Mantagua, Quintero. A 8 minutos del mar y 90 de Santiago. Naturaleza, tranquilidad e inversión segura en la Quinta Región.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mantagua",
+        "addressRegion": "Quinta Región",
+        "addressCountry": "CL"
+      },
+      "url": "https://costamantagua.cl"
+    }
+    </script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,494 +45,427 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 
     <style>
-        /* Por Qué Invertir Section */
-        .invertir-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+        :root {
+            --verde-bosque: #1B4332;
+            --verde-medio: #2D6A4F;
+            --verde-claro: #52B788;
+            --dorado: #C9A84C;
+            --crema: #F8F4EE;
+            --blanco: #FFFFFF;
+            --gris-oscuro: #1A1A2E;
+            --error: #e53e3e;
+            --negro-overlay: rgba(27, 67, 50, 0.7);
+            --transparente-overlay: rgba(27, 67, 50, 0.2);
+            --transition: all 0.3s ease;
         }
 
-        .invertir-card {
-            padding: 50px 40px;
-            background: var(--blanco);
-            border-radius: 20px;
-            border: 1px solid #eee;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--gris-oscuro);
+            background-color: var(--blanco);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
             transition: var(--transition);
-            text-align: center;
         }
 
-        .invertir-card:hover {
-            border-color: var(--verde-claro);
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        ul {
+            list-style: none;
         }
 
-        .invertir-icon {
-            font-size: 3rem;
-            margin-bottom: 25px;
-            display: inline-block;
-            transition: var(--transition);
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
 
-        .invertir-card:hover .invertir-icon {
-            color: var(--dorado);
-        }
-
-        .invertir-card h3 {
-            font-size: 1.5rem;
-            color: var(--verde-bosque);
-            margin-bottom: 15px;
-        }
-
-        /* Testimonios Section */
-        .testimonios-section {
-            background-color: var(--crema);
-        }
-
-        .swiper-container {
-            padding: 50px 0 100px;
-        }
-
-        .testimonio-card {
-            background: var(--blanco);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 600px;
+        .container {
+            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 0 20px;
         }
 
-        .stars {
-            color: var(--dorado);
-            margin-bottom: 20px;
-            font-size: 1.2rem;
+        .section-padding {
+            padding: 100px 0;
         }
 
-        .testimonio-text {
-            font-style: italic;
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            color: var(--gris-oscuro);
-        }
-
-        .testimonio-author {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--verde-medio);
-            color: var(--blanco);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-        }
-
-        .author-info {
-            text-align: left;
-        }
-
-        .author-name {
-            font-weight: 700;
-            color: var(--verde-bosque);
-        }
-
-        .author-city {
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
             font-size: 0.85rem;
-            color: #666;
-        }
-
-        .swiper-pagination-bullet-active {
-            background: var(--verde-medio) !important;
-        }
-
-        /* Contacto Section */
-        .contacto-section {
-            background: linear-gradient(135deg, var(--verde-bosque), var(--verde-medio));
-            color: var(--blanco);
-        }
-
-        .contacto-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .contacto-info h2 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
             margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .contacto-info p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 40px;
-        }
-
-        .contacto-details {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .detail-item {
-            display: flex;
+        .btn {
+            display: inline-flex;
             align-items: center;
-            gap: 15px;
-            font-size: 1.1rem;
-        }
-
-        .horario {
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .contacto-form-card {
-            background: var(--blanco);
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-            color: var(--gris-oscuro);
-        }
-
-        .form-group {
+            padding: 14px 28px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
             position: relative;
-            margin-bottom: 25px;
+            overflow: hidden;
         }
 
-        .form-input {
-            width: 100%;
-            padding: 15px 0;
-            border: none;
-            border-bottom: 2px solid #eee;
-            background: transparent;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: var(--transition);
-            outline: none;
-        }
-
-        .form-label {
-            position: absolute;
-            top: 15px;
-            left: 0;
-            color: #999;
-            pointer-events: none;
-            transition: var(--transition);
-        }
-
-        .form-input:focus ~ .form-label,
-        .form-input:valid ~ .form-label {
-            top: -10px;
-            font-size: 0.8rem;
-            color: var(--verde-claro);
-        }
-
-        .form-input:focus {
-            border-bottom-color: var(--verde-claro);
-        }
-
-        .form-select {
-            width: 100%;
-            padding: 15px 0;
-            border: none;
-            border-bottom: 2px solid #eee;
-            background: transparent;
-            font-family: inherit;
-            font-size: 1rem;
-            margin-bottom: 25px;
-            outline: none;
-        }
-
-        .form-textarea {
-            width: 100%;
-            padding: 15px 0;
-            border: none;
-            border-bottom: 2px solid #eee;
-            background: transparent;
-            font-family: inherit;
-            font-size: 1rem;
-            margin-bottom: 30px;
-            outline: none;
-            resize: none;
-            height: 80px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            justify-content: center;
-            padding: 18px;
-            font-size: 1.1rem;
-        }
-
-        .btn-submit:hover {
+        .btn-primary {
             background-color: var(--dorado);
             color: var(--verde-bosque);
         }
 
-        #success-message {
-            display: none;
-            text-align: center;
-            padding: 40px 0;
+        .btn-primary:hover {
+            background-color: #b39441;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .checkmark {
-            width: 80px;
-            height: 80px;
-            background: var(--verde-claro);
+        .btn-secondary {
+            background-color: transparent;
             color: var(--blanco);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            margin: 0 auto 20px;
+            border: 1px solid var(--blanco);
         }
 
-        /* Footer */
-        footer {
-            background-color: #0F2318;
+        .btn-secondary:hover {
+            background-color: var(--blanco);
+            color: var(--verde-bosque);
+        }
+
+        .btn-verde {
+            background-color: var(--verde-bosque);
             color: var(--blanco);
-            padding: 80px 0 40px;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 60px;
+        .btn-verde:hover {
+            background-color: var(--verde-medio);
         }
 
-        .footer-logo {
-            margin-bottom: 20px;
-        }
-
-        .footer-logo .logo-name { color: var(--blanco); }
-
-        .footer-tagline {
-            opacity: 0.7;
-            font-size: 0.9rem;
-            max-width: 250px;
-        }
-
-        .footer-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .footer-links {
-            display: flex; flex-direction: column; gap: 12px;
-        }
-
-        .footer-link {
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-
-        .footer-link:hover {
-            opacity: 1;
-            color: var(--dorado);
-            padding-left: 5px;
-        }
-
-        .footer-bottom {
-            padding-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-            font-size: 0.85rem;
-            opacity: 0.5;
-        }
-
-        /* Galería Section */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 250px;
-            gap: 20px;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(45, 106, 79, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-overlay i {
-            color: var(--blanco);
-            font-size: 2rem;
-            transform: scale(0.5);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        .gallery-item:hover .gallery-overlay i {
-            transform: scale(1);
-        }
-
-        .gallery-item.large {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        /* Lightbox */
-        #lightbox {
+        /* Loading Screen */
+        #loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 3000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 80%;
-            position: relative;
-        }
-
-        .lightbox-img {
-            max-width: 100%;
-            max-height: 100vh;
-            border: 5px solid var(--blanco);
-            border-radius: 4px;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: -50px;
-            right: 0;
-            color: var(--blanco);
-            font-size: 2.5rem;
-            cursor: pointer;
-        }
-
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            width: 100%;
+            background-color: var(--verde-bosque);
             display: flex;
-            justify-content: space-between;
-            padding: 0 40px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            animation: pulse-logo 1.5s infinite;
+        }
+
+        @keyframes pulse-logo {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
             pointer-events: none;
         }
 
-        .lightbox-btn {
-            background: rgba(255,255,255,0.1);
-            color: var(--blanco);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            cursor: pointer;
-            pointer-events: auto;
+        @keyframes ripple-animation {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
             transition: var(--transition);
         }
 
-        .lightbox-btn:hover {
-            background: var(--dorado);
+        .navbar.scrolled {
+            background-color: var(--blanco);
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo svg {
+            width: 35px;
+            height: 35px;
+            fill: var(--verde-claro);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--blanco);
+            letter-spacing: 0.03em;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .navbar.scrolled .logo-name {
             color: var(--verde-bosque);
         }
 
-        /* Ubicación Section */
-        .ubicacion-section {
-            background-color: var(--verde-bosque);
+        .logo-sub {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             color: var(--blanco);
+            opacity: 0.8;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
         }
 
-        .ubicacion-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 60px;
-            align-items: center;
+        .navbar.scrolled .logo-sub {
+            color: var(--verde-medio);
+            opacity: 1;
+            text-shadow: none;
         }
 
-        .ubicacion-info .badge {
-            background: rgba(255,255,255,0.1);
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            font-size: 0.95rem;
             color: var(--blanco);
-            border: 1px solid var(--blanco);
+            position: relative;
         }
 
-        .ubicacion-info h2 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: 30px;
+        .navbar.scrolled .nav-link {
+            color: var(--gris-oscuro);
         }
 
-        .ubicacion-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 40px;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--dorado);
+            transition: var(--transition);
         }
 
-        .ubicacion-list-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 1.1rem;
-        }
-
-        .map-container {
-            height: 450px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.1);
-        }
-
-        #map {
-            height: 100%;
+        .nav-link:hover::after {
             width: 100%;
+        }
+
+        .nav-cta .btn {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .mobile-toggle span {
+            width: 30px;
+            height: 2px;
+            background-color: var(--blanco);
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled .mobile-toggle span {
+            background-color: var(--verde-bosque);
+        }
+
+        .mobile-toggle.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .mobile-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-toggle.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--blanco);
+            overflow: hidden;
+            background-image: url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, var(--negro-overlay), var(--transparente-overlay));
             z-index: 1;
         }
+
+        #particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: float-particle linear infinite;
+        }
+
+        @keyframes float-particle {
+            from { transform: translateY(0); opacity: 0; }
+            50% { opacity: 0.5; }
+            to { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 4vw, 1.25rem);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .stat-item svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--dorado);
+            stroke-width: 2;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: bounce 2s infinite;
+            color: var(--blanco);
+            font-size: 1.5rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-10px) translateX(-50%);}
+            60% {transform: translateY(-5px) translateX(-50%);}
+        }
+
         /* El Proyecto Section */
         .proyecto-grid {
             display: grid;
@@ -693,7 +644,15 @@
         .lote-size {
             color: #666;
             font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .lote-card-price {
+            color: var(--dorado);
+            font-weight: 600;
+            font-size: 0.95rem;
             margin-bottom: 15px;
+            font-family: 'Inter', sans-serif;
         }
 
         .lote-tags {
@@ -709,13 +668,6 @@
             border-radius: 4px;
             font-size: 0.8rem;
             font-weight: 500;
-        }
-
-        .lote-price {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: var(--verde-bosque);
         }
 
         .lote-card.reservado .lote-overlay {
@@ -739,6 +691,337 @@
             transform: rotate(-15deg);
             font-size: 1.5rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Galería Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 250px;
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(45, 106, 79, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-overlay i {
+            color: var(--blanco);
+            font-size: 2rem;
+            transform: scale(0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .gallery-overlay i {
+            transform: scale(1);
+        }
+
+        .gallery-item.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        /* Ubicación Section */
+        .ubicacion-section {
+            background-color: var(--verde-bosque);
+            color: var(--blanco);
+        }
+
+        .ubicacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .ubicacion-info .badge {
+            background: rgba(255,255,255,0.1);
+            color: var(--blanco);
+            border: 1px solid var(--blanco);
+        }
+
+        .ubicacion-info h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 30px;
+        }
+
+        .ubicacion-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .ubicacion-list-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+        }
+
+        .map-container {
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+        }
+
+        /* Por Qué Invertir Section */
+        .invertir-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .invertir-card {
+            padding: 50px 40px;
+            background: var(--blanco);
+            border-radius: 20px;
+            border: 1px solid #eee;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .invertir-card:hover {
+            border-color: var(--verde-claro);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .invertir-icon {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .invertir-card:hover .invertir-icon {
+            color: var(--dorado);
+        }
+
+        .invertir-card h3 {
+            font-size: 1.5rem;
+            color: var(--verde-bosque);
+            margin-bottom: 15px;
+        }
+
+        /* Testimonios Section */
+        .testimonios-section {
+            background-color: var(--crema);
+        }
+
+        .swiper {
+            padding: 50px 0 100px;
+        }
+
+        .testimonio-card {
+            background: var(--blanco);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        /* Contacto Section */
+        .contacto-section {
+            background: linear-gradient(135deg, var(--verde-bosque), var(--verde-medio));
+            color: var(--blanco);
+        }
+
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .contacto-info h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 20px;
+        }
+
+        .contacto-info p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .contacto-details {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+        }
+
+        .contacto-form-card {
+            background: var(--blanco);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            color: var(--gris-oscuro);
+        }
+
+        /* Formulario con Validación Visual */
+        .form-group {
+            position: relative;
+            margin-bottom: 35px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 0;
+            border: none;
+            border-bottom: 2px solid #eee;
+            background: transparent;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-label {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            color: #999;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .form-input:focus ~ .form-label,
+        .form-input:not(:placeholder-shown) ~ .form-label,
+        .form-input.has-value ~ .form-label {
+            top: -10px;
+            font-size: 0.8rem;
+            color: var(--verde-claro);
+        }
+
+        /* Estados de Validación */
+        .form-input.valid {
+            border-bottom: 2px solid var(--verde-claro) !important;
+        }
+
+        .form-input.invalid {
+            border-bottom: 2px solid var(--error) !important;
+        }
+
+        .error-msg {
+            color: var(--error);
+            font-size: 0.75rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .valid-icon {
+            position: absolute;
+            right: 0;
+            top: 15px;
+            color: var(--verde-claro);
+            display: none;
+            font-weight: bold;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.2s ease-in-out 0s 2;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            background: var(--verde-claro);
+            color: var(--blanco);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0F2318;
+            color: var(--blanco);
+            padding: 80px 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-tagline {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            max-width: 250px;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.5;
         }
 
         /* Modal */
@@ -769,12 +1052,26 @@
 
         .modal-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
+            top: 15px;
+            right: 15px;
+            font-size: 2.5rem;
+            line-height: 1;
             cursor: pointer;
-            color: var(--gris-oscuro);
-            z-index: 3;
+            color: var(--verde-bosque);
+            z-index: 100;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            transform: scale(1.1);
+            background: var(--blanco);
         }
 
         .modal-body {
@@ -785,528 +1082,62 @@
             background: var(--crema);
             padding: 40px;
         }
-        /* Navbar */
-        .navbar {
+
+        /* Lightbox */
+        #lightbox {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 20px 0;
-            z-index: 1000;
-            transition: var(--transition);
-        }
-
-        .navbar.scrolled {
-            background-color: var(--blanco);
-            padding: 15px 0;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo svg {
-            width: 35px;
-            height: 35px;
-            fill: var(--verde-claro);
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logo-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            line-height: 1;
-            color: var(--blanco);
-        }
-
-        .navbar.scrolled .logo-name {
-            color: var(--verde-bosque);
-        }
-
-        .logo-sub {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--blanco);
-            opacity: 0.8;
-        }
-
-        .navbar.scrolled .logo-sub {
-            color: var(--verde-medio);
-            opacity: 1;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-link {
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: var(--blanco);
-            position: relative;
-        }
-
-        .navbar.scrolled .nav-link {
-            color: var(--gris-oscuro);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--dorado);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .nav-cta .btn {
-            padding: 10px 20px;
-            font-size: 0.9rem;
-        }
-
-        .mobile-toggle {
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 3000;
             display: none;
-            flex-direction: column;
-            gap: 6px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 80%;
+            border: 5px solid var(--blanco);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 3rem;
             cursor: pointer;
-            padding: 10px;
-            z-index: 1001;
-        }
-
-        .mobile-toggle span {
-            width: 30px;
-            height: 2px;
-            background-color: var(--blanco);
+            padding: 20px;
+            user-select: none;
             transition: var(--transition);
         }
 
-        .navbar.scrolled .mobile-toggle span {
-            background-color: var(--verde-bosque);
-        }
-
-        .mobile-toggle.open span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
-        .mobile-toggle.open span:nth-child(2) {
-            opacity: 0;
-        }
-        .mobile-toggle.open span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--blanco);
-            overflow: hidden;
-            background-image: url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, var(--negro-overlay), var(--transparente-overlay));
-            z-index: 1;
-        }
-
-        #particles-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            animation: float-particle linear infinite;
-        }
-
-        @keyframes float-particle {
-            from { transform: translateY(0); opacity: 0; }
-            50% { opacity: 0.5; }
-            to { transform: translateY(-100vh); opacity: 0; }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            max-width: 900px;
-            padding: 0 20px;
-        }
-
-        .hero .badge {
-            animation: pulse-dorado 2s infinite;
-        }
-
-        @keyframes pulse-dorado {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(201, 168, 76, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            margin-bottom: 20px;
-            line-height: 1.1;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 4vw, 1.25rem);
-            max-width: 600px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 60px;
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .stat-item i {
-            font-size: 1.5rem;
-        }
-
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
-            animation: bounce 2s infinite;
-            color: var(--blanco);
-            font-size: 1.5rem;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
-            40% {transform: translateY(-10px) translateX(-50%);}
-            60% {transform: translateY(-5px) translateX(-50%);}
-        }
-        :root {
-            --verde-bosque: #1B4332;
-            --verde-medio: #2D6A4F;
-            --verde-claro: #52B788;
-            --dorado: #C9A84C;
-            --crema: #F8F4EE;
-            --blanco: #FFFFFF;
-            --gris-oscuro: #1A1A2E;
-            --negro-overlay: rgba(27, 67, 50, 0.7);
-            --transparente-overlay: rgba(27, 67, 50, 0.2);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--gris-oscuro);
-            background-color: var(--blanco);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, .playfair {
-            font-family: 'Playfair Display', serif;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section-padding {
-            padding: 100px 0;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .badge-dorado {
-            background: rgba(201, 168, 76, 0.2);
+        .lightbox-nav:hover {
             color: var(--dorado);
-            border: 1px solid var(--dorado);
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 14px 28px;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            font-size: 1rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background-color: var(--dorado);
-            color: var(--verde-bosque);
-        }
-
-        .btn-primary:hover {
-            background-color: #b39441;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--blanco);
-            border: 1px solid var(--blanco);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--blanco);
-            color: var(--verde-bosque);
-        }
-
-        .btn-verde {
-            background-color: var(--verde-bosque);
-            color: var(--blanco);
-        }
-
-        .btn-verde:hover {
-            background-color: var(--verde-medio);
-        }
-
-        /* Loading Screen */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--verde-bosque);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-
-        #loading-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loader-logo {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 20px;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Custom Cursor */
-        #custom-cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--verde-claro);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 10000;
-            transition: transform 0.1s ease;
-            transform: translate(-50%, -50%);
-            display: none;
-        }
-
-        @media (min-width: 1025px) {
-            #custom-cursor {
-                display: block;
-            }
-            body {
-                cursor: none;
-            }
-            a, button, .clickable {
-                cursor: none;
-            }
-        }
-
-        /* Ripple Effect */
-        .ripple {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: scale(0);
-            animation: ripple-animation 0.6s linear;
-            pointer-events: none;
-        }
-
-        @keyframes ripple-animation {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .lotes-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: 200px;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .hero h1 {
-                font-size: 3.5rem;
-            }
+            .lotes-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 3.5rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
-            .section-padding {
-                padding: 60px 0;
-            }
-            .nav-links, .nav-cta {
-                display: none !important;
-            }
-            .mobile-toggle {
-                display: flex !important;
-            }
-            .proyecto-grid, .ubicacion-grid, .contacto-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .proyecto-image {
-                order: -1;
-            }
-            .invertir-grid {
-                grid-template-columns: 1fr;
-            }
-            .lotes-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero-btns {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .hero-stats {
-                gap: 20px;
-            }
-            .modal-content {
-                grid-template-columns: 1fr;
-                max-height: 90vh;
-                overflow-y: auto;
-            }
-            .modal-body, .modal-form {
-                padding: 30px;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .gallery-item.large {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
+            .nav-links, .nav-cta { display: none !important; }
+            .mobile-toggle { display: flex !important; }
+            .proyecto-grid, .ubicacion-grid, .contacto-grid { grid-template-columns: 1fr; }
+            .hero-stats { gap: 20px; }
+            .modal-content { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.8rem; }
         }
     </style>
 </head>
@@ -1317,11 +1148,8 @@
             <path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z" fill="#C9A84C"/>
             <path d="M12 18V2" stroke="#52B788" stroke-width="2"/>
         </svg>
-        <h2 style="color: white; margin-top: 10px;">Mantagua</h2>
+        <h2 style="color: white; margin-top: 10px;">Costa Mantagua</h2>
     </div>
-
-    <!-- Custom Cursor -->
-    <div id="custom-cursor"></div>
 
     <!-- Navbar -->
     <nav class="navbar">
@@ -1331,7 +1159,7 @@
                     <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8.17,20C14.33,20 19,15.33 19,9.17C19,8.75 18.97,8.35 18.92,7.95L21,7V5L17,8M11.5,14C11.5,14 9,14 9,11.5C9,9 11.5,9 11.5,9C11.5,9 14,9 14,11.5C14,14 11.5,14 11.5,14Z" />
                 </svg>
                 <div class="logo-text">
-                    <span class="logo-name">Mantagua</span>
+                    <span class="logo-name">Costa Mantagua</span>
                     <span class="logo-sub">Parcelas Exclusivas</span>
                 </div>
             </a>
@@ -1372,7 +1200,6 @@
     <header class="hero">
         <div id="particles-container"></div>
         <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-            <span class="badge badge-dorado">🌿 Proyecto exclusivo · Mantagua 2026</span>
             <h1>Tu parcela en <br> Mantagua te espera</h1>
             <p>Loteos residenciales a minutos del mar. Naturaleza, tranquilidad e inversión segura en la Quinta Región.</p>
             <div class="hero-btns">
@@ -1381,16 +1208,20 @@
             </div>
             <div class="hero-stats">
                 <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                    <i>🏡</i> <span><span class="counter" data-target="24">0</span> lotes</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span><span class="counter" data-target="24">0</span> lotes</span>
                 </div>
                 <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
-                    <i>📐</i> <span>500-2.000 m²</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                    <span><span class="counter" data-target="500">0</span>-<span class="counter" data-target="2000">0</span> m²</span>
                 </div>
                 <div class="stat-item" data-aos="fade-up" data-aos-delay="600">
-                    <i>🌊</i> <span>8 min al mar</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
+                    <span><span class="counter" data-target="8">0</span> min al mar</span>
                 </div>
                 <div class="stat-item" data-aos="fade-up" data-aos-delay="800">
-                    <i>🌿</i> <span>Naturaleza total</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8a8 8 0 0 1-10 10Z"/><path d="M7 21c0-4 1.85-7.1 6-10"/></svg>
+                    <span>Naturaleza total</span>
                 </div>
             </div>
         </div>
@@ -1404,7 +1235,7 @@
         <div class="container">
             <div class="proyecto-grid">
                 <div class="proyecto-content" data-aos="fade-right">
-                    <span class="badge">Sobre el proyecto</span>
+                    <span class="badge" style="background: rgba(45, 106, 79, 0.1); color: var(--verde-medio); border: 1px solid var(--verde-medio);">Sobre el proyecto</span>
                     <h2>Vive rodeado de <br> naturaleza en Mantagua</h2>
                     <p>Mantagua es uno de los últimos rincones vírgenes de la costa central chilena. A solo 8 minutos de la playa y 90 minutos de Santiago, nuestro proyecto ofrece lotes residenciales en un entorno natural privilegiado, con todos los servicios y la tranquilidad que buscas.</p>
 
@@ -1460,11 +1291,11 @@
                     <div class="lote-content">
                         <h3>Lote A-01</h3>
                         <p class="lote-size">850 m²</p>
+                        <div class="lote-card-price">Desde UF 2.450</div>
                         <div class="lote-tags">
                             <span class="lote-tag">🌊 Vista mar</span>
                             <span class="lote-tag">🌳 Esquina</span>
                         </div>
-                        <div class="lote-price">Desde UF consultar</div>
                         <button class="btn btn-verde btn-detalle" data-lote="A-01">Ver detalle →</button>
                     </div>
                 </div>
@@ -1476,11 +1307,11 @@
                     <div class="lote-content">
                         <h3>Lote A-02</h3>
                         <p class="lote-size">620 m²</p>
+                        <div class="lote-card-price">Desde UF 2.100</div>
                         <div class="lote-tags">
                             <span class="lote-tag">🌳 Arbolado</span>
                             <span class="lote-tag">⚡ Servicios</span>
                         </div>
-                        <div class="lote-price">Desde UF consultar</div>
                         <button class="btn btn-verde btn-detalle" data-lote="A-02">Ver detalle →</button>
                     </div>
                 </div>
@@ -1495,10 +1326,10 @@
                     <div class="lote-content">
                         <h3>Lote B-01</h3>
                         <p class="lote-size">1.200 m²</p>
+                        <div class="lote-card-price">Precio a consultar</div>
                         <div class="lote-tags">
                             <span class="lote-tag">⭐ Premium</span>
                         </div>
-                        <div class="lote-price">Reservado</div>
                         <button class="btn btn-verde" disabled>Ver detalle →</button>
                     </div>
                 </div>
@@ -1510,10 +1341,10 @@
                     <div class="lote-content">
                         <h3>Lote B-02</h3>
                         <p class="lote-size">750 m²</p>
+                        <div class="lote-card-price">Desde UF 2.300</div>
                         <div class="lote-tags">
                             <span class="lote-tag">🏔️ Vista cerros</span>
                         </div>
-                        <div class="lote-price">Desde UF consultar</div>
                         <button class="btn btn-verde btn-detalle" data-lote="B-02">Ver detalle →</button>
                     </div>
                 </div>
@@ -1525,11 +1356,11 @@
                     <div class="lote-content">
                         <h3>Lote C-01</h3>
                         <p class="lote-size">500 m²</p>
+                        <div class="lote-card-price">Desde UF 1.950</div>
                         <div class="lote-tags">
                             <span class="lote-tag">🌊 Plano</span>
                             <span class="lote-tag">🌳 Tranquilo</span>
                         </div>
-                        <div class="lote-price">Desde UF consultar</div>
                         <button class="btn btn-verde btn-detalle" data-lote="C-01">Ver detalle →</button>
                     </div>
                 </div>
@@ -1541,11 +1372,11 @@
                     <div class="lote-content">
                         <h3>Lote C-02</h3>
                         <p class="lote-size">980 m²</p>
+                        <div class="lote-card-price">Desde UF 2.700</div>
                         <div class="lote-tags">
                             <span class="lote-tag">⭐ Premium</span>
                             <span class="lote-tag">🌊 Vista</span>
                         </div>
-                        <div class="lote-price">Desde UF consultar</div>
                         <button class="btn btn-verde btn-detalle" data-lote="C-02">Ver detalle →</button>
                     </div>
                 </div>
@@ -1569,10 +1400,20 @@
             </div>
             <div class="modal-form">
                 <h3>Cotizar este lote</h3>
-                <form id="modal-contact-form" style="margin-top: 20px; display: flex; flex-direction: column; gap: 15px;">
+                <form id="modal-contact-form" novalidate style="margin-top: 20px; display: flex; flex-direction: column; gap: 15px;">
                     <input type="hidden" id="modal-lote-input" name="lote">
-                    <input type="text" placeholder="Nombre completo" required style="padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
-                    <input type="email" placeholder="Tu Email" required style="padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <input type="text" id="modal-name" class="form-input" placeholder=" " required>
+                        <label for="modal-name" class="form-label">Nombre completo *</label>
+                        <div class="error-msg">Por favor ingresa tu nombre</div>
+                        <span class="valid-icon">✓</span>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <input type="email" id="modal-email" class="form-input" placeholder=" " required>
+                        <label for="modal-email" class="form-label">Email *</label>
+                        <div class="error-msg">Ingresa un email válido</div>
+                        <span class="valid-icon">✓</span>
+                    </div>
                     <button type="submit" class="btn btn-primary">Solicitar información</button>
                 </form>
             </div>
@@ -1626,13 +1467,11 @@
 
     <!-- Lightbox -->
     <div id="lightbox">
-        <span class="lightbox-close">&times;</span>
+        <span class="lightbox-close" style="position: absolute; top: 20px; right: 40px; color: white; font-size: 3rem; cursor: pointer;">&times;</span>
+        <div class="lightbox-prev lightbox-nav">&#10094;</div>
+        <div class="lightbox-next lightbox-nav">&#10095;</div>
         <div class="lightbox-content">
             <img class="lightbox-img" src="" alt="Lightbox image">
-        </div>
-        <div class="lightbox-nav">
-            <div class="lightbox-btn" id="prev-img">‹</div>
-            <div class="lightbox-btn" id="next-img">›</div>
         </div>
     </div>
 
@@ -1641,27 +1480,15 @@
         <div class="container">
             <div class="ubicacion-grid">
                 <div class="ubicacion-info" data-aos="fade-right">
-                    <span class="badge">Ubicación privilegiada</span>
+                    <span class="badge" style="background: rgba(255,255,255,0.1); color: var(--blanco); border: 1px solid var(--blanco);">Ubicación privilegiada</span>
                     <h2>En el corazón <br> de Mantagua</h2>
                     <div class="ubicacion-list">
-                        <div class="ubicacion-list-item">
-                            <span>📍</span> Mantagua, Quintero, V Región
-                        </div>
-                        <div class="ubicacion-list-item">
-                            <span>🚗</span> 90 min desde Santiago
-                        </div>
-                        <div class="ubicacion-list-item">
-                            <span>🌊</span> 8 min hasta la playa
-                        </div>
-                        <div class="ubicacion-list-item">
-                            <span>✈️</span> 45 min del aeropuerto SCL
-                        </div>
-                        <div class="ubicacion-list-item">
-                            <span>🏪</span> Servicios en Quintero a 15 min
-                        </div>
-                        <div class="ubicacion-list-item">
-                            <span>🏥</span> Hospital en Quintero
-                        </div>
+                        <div class="ubicacion-list-item"><span>📍</span> Mantagua, Quintero, V Región</div>
+                        <div class="ubicacion-list-item"><span>🚗</span> 90 min desde Santiago</div>
+                        <div class="ubicacion-list-item"><span>🌊</span> 8 min hasta la playa</div>
+                        <div class="ubicacion-list-item"><span>✈️</span> 45 min del aeropuerto SCL</div>
+                        <div class="ubicacion-list-item"><span>🏪</span> Servicios en Quintero a 15 min</div>
+                        <div class="ubicacion-list-item"><span>🏥</span> Hospital en Quintero</div>
                     </div>
                     <a href="https://www.google.com/maps?q=-32.7833,-71.4500" target="_blank" class="btn btn-primary">Cómo llegar →</a>
                 </div>
@@ -1676,7 +1503,7 @@
     <section class="section-padding">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <h2>¿Por qué invertir en Mantagua?</h2>
+                <h2>¿Por qué invertir en Costa Mantagua?</h2>
             </div>
             <div class="invertir-grid">
                 <div class="invertir-card" data-aos="fade-up">
@@ -1704,46 +1531,43 @@
             <div class="section-header" data-aos="fade-up">
                 <h2>Lo que dicen nuestros clientes</h2>
             </div>
-            <div class="swiper-container" data-aos="fade-up">
+            <div class="swiper" data-aos="fade-up">
                 <div class="swiper-wrapper">
-                    <!-- Testimonio 1 -->
                     <div class="swiper-slide">
                         <div class="testimonio-card">
-                            <div class="stars">★★★★★</div>
-                            <p class="testimonio-text">"Compramos el lote B-03 hace 6 meses y ya vemos cómo la zona se está desarrollando. La mejor inversión que hemos hecho."</p>
-                            <div class="testimonio-author">
-                                <div class="author-avatar">CM</div>
-                                <div class="author-info">
-                                    <div class="author-name">Carlos y María R.</div>
-                                    <div class="author-city">Santiago</div>
+                            <div style="color: var(--dorado); margin-bottom: 20px; font-size: 1.2rem;">★★★★★</div>
+                            <p style="font-style: italic; font-size: 1.1rem; margin-bottom: 30px; color: var(--gris-oscuro);">"Compramos el lote B-03 hace 6 meses y ya vemos cómo la zona se está desarrollando. La mejor inversión que hemos hecho."</p>
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+                                <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--verde-medio); color: var(--blanco); display: flex; align-items: center; justify-content: center; font-weight: 700;">CM</div>
+                                <div style="text-align: left;">
+                                    <div style="font-weight: 700; color: var(--verde-bosque);">Carlos y María R.</div>
+                                    <div style="font-size: 0.85rem; color: #666;">Santiago</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Testimonio 2 -->
                     <div class="swiper-slide">
                         <div class="testimonio-card">
-                            <div class="stars">★★★★★</div>
-                            <p class="testimonio-text">"El proceso de compra fue transparente y rápido. En 30 días teníamos la escritura lista. Muy profesionales."</p>
-                            <div class="testimonio-author">
-                                <div class="author-avatar">RM</div>
-                                <div class="author-info">
-                                    <div class="author-name">Rodrigo M.</div>
-                                    <div class="author-city">Viña del Mar</div>
+                            <div style="color: var(--dorado); margin-bottom: 20px; font-size: 1.2rem;">★★★★★</div>
+                            <p style="font-style: italic; font-size: 1.1rem; margin-bottom: 30px; color: var(--gris-oscuro);">"El proceso de compra fue transparente y rápido. En 30 días teníamos la escritura lista. Muy profesionales."</p>
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+                                <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--verde-medio); color: var(--blanco); display: flex; align-items: center; justify-content: center; font-weight: 700;">RM</div>
+                                <div style="text-align: left;">
+                                    <div style="font-weight: 700; color: var(--verde-bosque);">Rodrigo M.</div>
+                                    <div style="font-size: 0.85rem; color: #666;">Viña del Mar</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Testimonio 3 -->
                     <div class="swiper-slide">
                         <div class="testimonio-card">
-                            <div class="stars">★★★★★</div>
-                            <p class="testimonio-text">"Buscábamos un lugar para construir nuestra casa de campo. Mantagua superó todas nuestras expectativas."</p>
-                            <div class="testimonio-author">
-                                <div class="author-avatar">FS</div>
-                                <div class="author-info">
-                                    <div class="author-name">Familia Soto</div>
-                                    <div class="author-city">Las Condes</div>
+                            <div style="color: var(--dorado); margin-bottom: 20px; font-size: 1.2rem;">★★★★★</div>
+                            <p style="font-style: italic; font-size: 1.1rem; margin-bottom: 30px; color: var(--gris-oscuro);">"Buscábamos un lugar para construir nuestra casa de campo. Mantagua superó todas nuestras expectativas."</p>
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+                                <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--verde-medio); color: var(--blanco); display: flex; align-items: center; justify-content: center; font-weight: 700;">FS</div>
+                                <div style="text-align: left;">
+                                    <div style="font-weight: 700; color: var(--verde-bosque);">Familia Soto</div>
+                                    <div style="font-size: 0.85rem; color: #666;">Las Condes</div>
                                 </div>
                             </div>
                         </div>
@@ -1762,37 +1586,37 @@
                     <h2>¿Interesado en un lote? <br> Conversemos hoy.</h2>
                     <p>Nuestros ejecutivos te contactan en menos de 24 horas.</p>
                     <div class="contacto-details">
-                        <div class="detail-item">
-                            <span>📞</span> +56 9 XXXX XXXX
-                        </div>
-                        <div class="detail-item">
-                            <span>📧</span> ventas@mantagua.cl
-                        </div>
-                        <div class="detail-item">
-                            <span>📍</span> Oficina en Quintero, V Región
-                        </div>
+                        <div class="detail-item"><span>📞</span> +56 9 XXXX XXXX</div>
+                        <div class="detail-item"><span>📧</span> ventas@costamantagua.cl</div>
+                        <div class="detail-item"><span>📍</span> Oficina en Quintero, V Región</div>
                     </div>
-                    <div class="horario">
+                    <div style="padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.9rem; opacity: 0.8;">
                         Lunes a Viernes 9:00 - 18:00 <br>
                         Sábados 10:00 - 14:00
                     </div>
                 </div>
                 <div class="contacto-form-card" data-aos="fade-left">
-                    <form id="main-contact-form">
+                    <form id="main-contact-form" novalidate>
                         <div class="form-group">
                             <input type="text" class="form-input" id="name" placeholder=" " required>
                             <label for="name" class="form-label">Nombre completo *</label>
+                            <div class="error-msg">Por favor ingresa tu nombre</div>
+                            <span class="valid-icon">✓</span>
                         </div>
                         <div class="form-group">
                             <input type="email" class="form-input" id="email" placeholder=" " required>
                             <label for="email" class="form-label">Email *</label>
+                            <div class="error-msg">Ingresa un email válido</div>
+                            <span class="valid-icon">✓</span>
                         </div>
                         <div class="form-group">
                             <input type="tel" class="form-input" id="phone" placeholder=" " required>
                             <label for="phone" class="form-label">Teléfono *</label>
+                            <div class="error-msg">Formato: +56 9 XXXX XXXX</div>
+                            <span class="valid-icon">✓</span>
                         </div>
                         <div class="form-group">
-                            <select class="form-input" id="lote-select" required>
+                            <select class="form-input" id="lote-select" required style="border-bottom: 2px solid #eee; width: 100%; padding: 15px 0; background: transparent; outline: none;">
                                 <option value="" disabled selected hidden></option>
                                 <option value="Lote A-01">Lote A-01</option>
                                 <option value="Lote A-02">Lote A-02</option>
@@ -1802,23 +1626,21 @@
                                 <option value="No lo sé aún">No lo sé aún</option>
                             </select>
                             <label for="lote-select" class="form-label">¿Qué lote te interesa?</label>
+                            <div class="error-msg">Selecciona una opción</div>
                         </div>
                         <div class="form-group">
-                            <select class="form-input" id="time-select" required>
+                            <select class="form-input" id="time-select" required style="border-bottom: 2px solid #eee; width: 100%; padding: 15px 0; background: transparent; outline: none;">
                                 <option value="" disabled selected hidden></option>
                                 <option value="En los próximos 3 meses">En los próximos 3 meses</option>
                                 <option value="3 a 6 meses">3 a 6 meses</option>
                                 <option value="Solo explorando">Solo explorando</option>
                             </select>
                             <label for="time-select" class="form-label">¿Cuándo planeas comprar?</label>
+                            <div class="error-msg">Selecciona una opción</div>
                         </div>
-                        <div class="form-group">
-                            <textarea class="form-input" id="message" placeholder=" " style="height: 80px; resize: none;"></textarea>
-                            <label for="message" class="form-label">Mensaje opcional</label>
-                        </div>
-                        <button type="submit" class="btn btn-verde btn-submit">Quiero que me contacten →</button>
+                        <button type="submit" class="btn btn-verde btn-submit" style="width: 100%; justify-content: center; padding: 18px; font-size: 1.1rem;">Quiero que me contacten →</button>
                     </form>
-                    <div id="success-message">
+                    <div id="success-message" style="display: none; text-align: center; padding: 40px 0;">
                         <div class="checkmark">✓</div>
                         <h3>¡Gracias!</h3>
                         <p>Te contactaremos pronto.</p>
@@ -1837,48 +1659,45 @@
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8.17,20C14.33,20 19,15.33 19,9.17C19,8.75 18.97,8.35 18.92,7.95L21,7V5L17,8M11.5,14C11.5,14 9,14 9,11.5C9,9 11.5,9 11.5,9C11.5,9 14,9 14,11.5C14,14 11.5,14 11.5,14Z" fill="#52B788"/>
                         </svg>
-                        <span class="logo-name">Mantagua</span>
+                        <span class="logo-name">Costa Mantagua</span>
                     </a>
-                    <p class="footer-tagline">Mantagua Parcelas Exclusivas. Invierte en naturaleza. Vive diferente.</p>
+                    <p class="footer-tagline">Costa Mantagua Parcelas Exclusivas. Invierte en naturaleza. Vive diferente.</p>
                 </div>
                 <div>
-                    <h4 class="footer-title">El Proyecto</h4>
-                    <div class="footer-links">
-                        <a href="#proyecto" class="footer-link">Sobre nosotros</a>
-                        <a href="#lotes" class="footer-link">Lotes</a>
-                        <a href="#galeria" class="footer-link">Galería</a>
-                        <a href="#ubicacion" class="footer-link">Ubicación</a>
+                    <h4 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 25px; font-family: 'Playfair Display', serif;">El Proyecto</h4>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <a href="#proyecto" class="footer-link" style="opacity: 0.7; font-size: 0.9rem;">Sobre nosotros</a>
+                        <a href="#lotes" class="footer-link" style="opacity: 0.7; font-size: 0.9rem;">Lotes</a>
+                        <a href="#galeria" class="footer-link" style="opacity: 0.7; font-size: 0.9rem;">Galería</a>
+                        <a href="#ubicacion" class="footer-link" style="opacity: 0.7; font-size: 0.9rem;">Ubicación</a>
                     </div>
                 </div>
                 <div>
-                    <h4 class="footer-title">Legal</h4>
-                    <div class="footer-links">
-                        <a href="#" class="footer-link">Términos y condiciones</a>
-                        <a href="#" class="footer-link">Política de privacidad</a>
-                        <a href="#" class="footer-link">Información de la empresa</a>
+                    <h4 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 25px; font-family: 'Playfair Display', serif;">Legal</h4>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <a href="#" class="footer-link" style="opacity: 0.7; font-size: 0.9rem;">Términos y condiciones</a>
+                        <a href="#" class="footer-link" style="opacity: 0.7; font-size: 0.9rem;">Política de privacidad</a>
                     </div>
                 </div>
                 <div>
-                    <h4 class="footer-title">Contacto</h4>
-                    <div class="footer-links">
-                        <span class="footer-link">+56 9 XXXX XXXX</span>
-                        <span class="footer-link">ventas@mantagua.cl</span>
-                        <span class="footer-link">Quintero, V Región, Chile</span>
+                    <h4 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 25px; font-family: 'Playfair Display', serif;">Contacto</h4>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <span style="opacity: 0.7; font-size: 0.9rem;">+56 9 XXXX XXXX</span>
+                        <span style="opacity: 0.7; font-size: 0.9rem;">ventas@costamantagua.cl</span>
+                        <span style="opacity: 0.7; font-size: 0.9rem;">Quintero, V Región, Chile</span>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                © 2026 Mantagua Parcelas Exclusivas. Todos los derechos reservados.
+                © 2026 Costa Mantagua Parcelas Exclusivas. Todos los derechos reservados.
             </div>
         </div>
     </footer>
 
     <!-- Leaflet.js -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
     <!-- Swiper.js -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
     <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
@@ -1886,20 +1705,9 @@
         // Loading Screen
         window.addEventListener('load', () => {
             setTimeout(() => {
-                const loadingScreen = document.getElementById('loading-screen');
-                loadingScreen.classList.add('hidden');
+                document.getElementById('loading-screen').classList.add('hidden');
             }, 1500);
         });
-
-        // Custom Cursor
-        const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        document.addEventListener('mousedown', () => cursor.style.transform = 'translate(-50%, -50%) scale(0.8)');
-        document.addEventListener('mouseup', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
 
         // Navbar Scroll Effect
         const navbar = document.querySelector('.navbar');
@@ -1932,74 +1740,57 @@
         document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.style.top = '-100%';
+                mobileToggle.classList.remove('open');
                 menuOpen = false;
             });
         });
 
-        // Particles Effect (CSS-based but spawned by JS for flexibility)
+        // Particles
         const particlesContainer = document.getElementById('particles-container');
-        const particleCount = 30;
-
-        for (let i = 0; i < particleCount; i++) {
+        for (let i = 0; i < 30; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
-
             const size = Math.random() * 5 + 2 + 'px';
             particle.style.width = size;
             particle.style.height = size;
-
             particle.style.left = Math.random() * 100 + '%';
             particle.style.top = Math.random() * 100 + '%';
-
-            const duration = Math.random() * 10 + 10 + 's';
-            const delay = Math.random() * 20 + 's';
-            particle.style.animationDuration = duration;
-            particle.style.animationDelay = delay;
-
+            particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+            particle.style.animationDelay = Math.random() * 20 + 's';
             particlesContainer.appendChild(particle);
         }
 
         // Stats Counter
-        const counters = document.querySelectorAll('.counter');
-        const counterOptions = { threshold: 1, rootMargin: "0px 0px -50px 0px" };
-
         const counterObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const target = +entry.target.getAttribute('data-target');
-                    const count = +entry.target.innerText;
+                    let current = 0;
                     const speed = 200;
                     const inc = target / speed;
-
-                    const updateCount = () => {
-                        const current = +entry.target.innerText;
+                    const update = () => {
                         if (current < target) {
-                            entry.target.innerText = Math.ceil(current + inc);
-                            setTimeout(updateCount, 1);
+                            current += inc;
+                            entry.target.innerText = Math.ceil(current);
+                            setTimeout(update, 1);
                         } else {
                             entry.target.innerText = target;
                         }
                     };
-                    updateCount();
+                    update();
                     observer.unobserve(entry.target);
                 }
             });
-        }, counterOptions);
-
-        counters.forEach(counter => counterObserver.observe(counter));
+        }, { threshold: 1 });
+        document.querySelectorAll('.counter').forEach(c => counterObserver.observe(c));
 
         // Lotes Filter
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const loteCards = document.querySelectorAll('.lote-card');
-
-        filterBtns.forEach(btn => {
+        document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
                 const filter = btn.getAttribute('data-filter');
-
-                loteCards.forEach(card => {
+                document.querySelectorAll('.lote-card').forEach(card => {
                     if (filter === 'all' || card.getAttribute('data-status') === filter) {
                         card.style.display = 'block';
                         setTimeout(() => card.style.opacity = '1', 10);
@@ -2011,179 +1802,172 @@
             });
         });
 
-        // Lote Modal
-        const modal = document.getElementById('lote-modal');
-        const modalClose = document.querySelector('.modal-close');
-        const detalleBtns = document.querySelectorAll('.btn-detalle');
+        // Validation Logic
+        const validateField = (field) => {
+            const group = field.closest('.form-group');
+            if (!group) return true;
+            const errorMsg = group.querySelector('.error-msg');
+            const validIcon = group.querySelector('.valid-icon');
+            let isValid = true;
 
-        const loteData = {
-            'A-01': { size: '850 m²', desc: 'Excelente ubicación en esquina con vista despejada al mar.' },
-            'A-02': { size: '620 m²', desc: 'Terreno arbolado ideal para proyecto sustentable con servicios a la mano.' },
-            'B-02': { size: '750 m²', desc: 'Ubicación privilegiada con vista panorámica a los cerros de Mantagua.' },
-            'C-01': { size: '500 m²', desc: 'Terreno plano, listo para construir en la zona más tranquila del loteo.' },
-            'C-02': { size: '980 m²', desc: 'Lote premium de gran tamaño con la mejor orientación solar y vista.' }
+            if (field.required && !field.value.trim()) {
+                isValid = false;
+            } else if (field.type === 'email' && field.value.trim()) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                isValid = re.test(field.value.trim());
+            } else if (field.id === 'phone' && field.value.trim()) {
+                // Chileno: +56 9 XXXX XXXX o 9 XXXX XXXX
+                const re = /^(\+56\s?9|9)\s?\d{4}\s?\d{4}$/;
+                isValid = re.test(field.value.trim());
+            }
+
+            if (isValid) {
+                field.classList.remove('invalid');
+                field.classList.add('valid');
+                if (errorMsg) errorMsg.style.display = 'none';
+                if (validIcon) validIcon.style.display = 'block';
+            } else {
+                field.classList.remove('valid');
+                field.classList.add('invalid');
+                if (errorMsg) errorMsg.style.display = 'block';
+                if (validIcon) validIcon.style.display = 'none';
+            }
+            return isValid;
         };
 
-        detalleBtns.forEach(btn => {
+        const setupValidation = (formId) => {
+            const form = document.getElementById(formId);
+            if (!form) return;
+            const inputs = form.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('blur', () => validateField(input));
+                input.addEventListener('input', () => {
+                    if (input.value) input.classList.add('has-value');
+                    else input.classList.remove('has-value');
+                    if (input.classList.contains('invalid')) validateField(input);
+                });
+            });
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let isFormValid = true;
+                inputs.forEach(input => {
+                    if (!validateField(input)) {
+                        isFormValid = false;
+                        input.parentElement.classList.add('shake');
+                        setTimeout(() => input.parentElement.classList.remove('shake'), 500);
+                    }
+                });
+                if (isFormValid) {
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    submitBtn.innerText = 'Enviando...';
+                    submitBtn.disabled = true;
+                    setTimeout(() => {
+                        form.style.display = 'none';
+                        const successMsg = document.getElementById('success-message');
+                        if (successMsg) successMsg.style.display = 'block';
+                        if (formId === 'modal-contact-form') {
+                             form.parentElement.innerHTML = '<div style="text-align:center; padding: 20px;"><div class="checkmark">✓</div><h3>¡Gracias!</h3><p>Te contactaremos pronto por este lote.</p></div>';
+                        }
+                    }, 1500);
+                }
+            });
+        };
+        setupValidation('main-contact-form');
+        setupValidation('modal-contact-form');
+
+        // Map init
+        const map = L.map('map', { scrollWheelZoom: false }).setView([-32.7833, -71.4500], 13);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+        const greenIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: "<div style='background-color:#1B4332; width:30px; height:30px; border-radius:50%; border:2px solid #C9A84C; display:flex; align-items:center; justify-content:center; color:white; font-size:15px;'>🌿</div>",
+            iconSize: [30, 30], iconAnchor: [15, 15]
+        });
+        L.marker([-32.7833, -71.4500], { icon: greenIcon }).addTo(map).bindPopup('<b>🌿 Costa Mantagua</b><br>Loteos Residenciales');
+        L.circle([-32.7833, -71.4500], { color: '#52B788', fillOpacity: 0.2, radius: 500 }).addTo(map);
+
+        // AOS & Swiper
+        AOS.init({ duration: 800, once: true });
+        new Swiper('.swiper', {
+            loop: true,
+            autoplay: { delay: 5000 },
+            pagination: { el: '.swiper-pagination', clickable: true }
+        });
+
+        // Modals & Lightbox
+        const modal = document.getElementById('lote-modal');
+        document.querySelectorAll('.btn-detalle').forEach(btn => {
             btn.addEventListener('click', () => {
                 const id = btn.getAttribute('data-lote');
-                const data = loteData[id];
-
                 document.getElementById('modal-lote-title').innerText = 'Lote ' + id;
-                document.getElementById('modal-lote-desc').innerText = data.desc;
-                document.getElementById('modal-lote-size').innerText = data.size;
                 document.getElementById('modal-lote-input').value = 'Lote ' + id;
-
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
             });
         });
-
-        modalClose.addEventListener('click', () => {
+        document.querySelector('.modal-close').addEventListener('click', () => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
 
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Gallery Lightbox
         const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.querySelector('.lightbox-img');
-        const lightboxClose = document.querySelector('.lightbox-close');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        const prevBtn = document.getElementById('prev-img');
-        const nextBtn = document.getElementById('next-img');
+        const lightboxImg = lightbox.querySelector('.lightbox-img');
+        const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
         let currentImgIndex = 0;
-        const images = Array.from(galleryItems).map(item => item.getAttribute('data-src'));
 
-        galleryItems.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                currentImgIndex = index;
-                showLightbox(images[currentImgIndex]);
-            });
-        });
-
-        function showLightbox(src) {
-            lightboxImg.src = src;
+        const showLightbox = (index) => {
+            currentImgIndex = index;
+            lightboxImg.src = galleryItems[index].getAttribute('data-src');
             lightbox.style.display = 'flex';
             document.body.style.overflow = 'hidden';
-        }
+        };
 
-        lightboxClose.addEventListener('click', () => {
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => showLightbox(index));
+        });
+
+        const nextImg = () => {
+            currentImgIndex = (currentImgIndex + 1) % galleryItems.length;
+            lightboxImg.src = galleryItems[currentImgIndex].getAttribute('data-src');
+        };
+
+        const prevImg = () => {
+            currentImgIndex = (currentImgIndex - 1 + galleryItems.length) % galleryItems.length;
+            lightboxImg.src = galleryItems[currentImgIndex].getAttribute('data-src');
+        };
+
+        document.querySelector('.lightbox-next').addEventListener('click', (e) => {
+            e.stopPropagation();
+            nextImg();
+        });
+
+        document.querySelector('.lightbox-prev').addEventListener('click', (e) => {
+            e.stopPropagation();
+            prevImg();
+        });
+
+        document.querySelector('.lightbox-close').addEventListener('click', () => {
             lightbox.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
 
-        nextBtn.addEventListener('click', () => {
-            currentImgIndex = (currentImgIndex + 1) % images.length;
-            lightboxImg.src = images[currentImgIndex];
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
         });
-
-        prevBtn.addEventListener('click', () => {
-            currentImgIndex = (currentImgIndex - 1 + images.length) % images.length;
-            lightboxImg.src = images[currentImgIndex];
-        });
-
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 100
-        });
-
-        // Initialize Swiper
-        const swiper = new Swiper('.swiper-container', {
-            loop: true,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            slidesPerView: 1,
-            spaceBetween: 30,
-        });
-
-        // Initialize Leaflet Map
-        const map = L.map('map', {
-            scrollWheelZoom: false
-        }).setView([-32.7833, -71.4500], 13);
-
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-            attribution: '© OpenStreetMap contributors © CARTO'
-        }).addTo(map);
-
-        const greenIcon = L.divIcon({
-            className: 'custom-div-icon',
-            html: "<div style='background-color:#1B4332; width:30px; height:30px; border-radius:50%; border:2px solid #C9A84C; display:flex; align-items:center; justify-content:center; color:white; font-size:15px;'>🌿</div>",
-            iconSize: [30, 30],
-            iconAnchor: [15, 15]
-        });
-
-        L.marker([-32.7833, -71.4500], {icon: greenIcon}).addTo(map)
-            .bindPopup('<b>🌿 Proyecto Mantagua</b><br>Loteos Residenciales')
-            .openPopup();
-
-        L.circle([-32.7833, -71.4500], {
-            color: '#52B788',
-            fillColor: '#52B788',
-            fillOpacity: 0.2,
-            radius: 500
-        }).addTo(map);
-
-        // Form Handling (Main & Modal)
-        const handleFormSubmit = (formId, successId) => {
-            const form = document.getElementById(formId);
-            if (!form) return;
-
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                // Simulate sending
-                const submitBtn = form.querySelector('button[type="submit"]');
-                const originalText = submitBtn.innerText;
-                submitBtn.innerText = 'Enviando...';
-                submitBtn.disabled = true;
-
-                setTimeout(() => {
-                    form.style.display = 'none';
-                    const successMsg = document.getElementById(successId);
-                    if (successMsg) successMsg.style.display = 'block';
-
-                    // If it's the modal form, also show a simple alert or update modal body
-                    if (formId === 'modal-contact-form') {
-                        form.parentElement.innerHTML = '<div style="text-align:center; padding: 20px;"><div class="checkmark">✓</div><h3>¡Gracias!</h3><p>Te contactaremos pronto por este lote.</p></div>';
-                    }
-                }, 1500);
-            });
-        };
-
-        handleFormSubmit('main-contact-form', 'success-message');
-        handleFormSubmit('modal-contact-form', '');
 
         // Ripple Effect
         document.querySelectorAll('.btn').forEach(button => {
             button.addEventListener('click', function(e) {
                 const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                let ripples = document.createElement('span');
-                ripples.className = 'ripple';
-                ripples.style.left = x + 'px';
-                ripples.style.top = y + 'px';
-                this.appendChild(ripples);
-
-                setTimeout(() => {
-                    ripples.remove();
-                }, 600);
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                ripple.style.left = (e.clientX - rect.left) + 'px';
+                ripple.style.top = (e.clientY - rect.top) + 'px';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
             });
         });
     </script>
