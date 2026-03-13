@@ -79,7 +79,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Grain Overlay */
+        /* Capa de Grano */
         body::before {
             content: "";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -89,7 +89,7 @@
             z-index: 9999;
         }
 
-        /* 3. LOADING SCREEN */
+        /* LOADING SCREEN */
         #loading {
             position: fixed; top:0; left:0; width:100%; height:100%;
             background: var(--verde-bosque); z-index: 10002;
@@ -99,26 +99,22 @@
         .loading-logo { width: 80px; height: 80px; margin-bottom: 20px; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 0.5; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0.5; transform: scale(0.9); } }
 
-        /* 4. TYPOGRAPHY */
+        /* TYPOGRAPHY */
         h1, h2, h3, h4, .playfair { font-family: 'Playfair Display', serif; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .badge {
             display: inline-block; padding: 8px 16px; border-radius: 50px;
             background: rgba(201, 168, 76, 0.2); color: var(--dorado);
             font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
             letter-spacing: 0.15em; margin-bottom: 1.5rem;
-            backdrop-filter: blur(5px);
         }
 
-        /* 5. SPLIT-TEXT REVEAL */
-        .reveal-container { overflow: hidden; display: block; }
-        .reveal-text {
-            display: inline-block; transform: translateY(110%);
-            transition: transform 1.2s var(--transition-premium);
-            will-change: transform;
-        }
-        .reveal-container.active .reveal-text { transform: translateY(0); }
-
-        /* 6. NAVBAR */
+        /* NAVBAR */
         nav {
             position: fixed; top: 0; width: 100%; z-index: 1000;
             padding: 25px 5%; display: flex; justify-content: space-between; align-items: center;
@@ -139,17 +135,12 @@
         .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-link {
             text-decoration: none; color: var(--blanco); font-size: 0.85rem;
-            font-weight: 500; transition: color 0.3s; position: relative;
+            font-weight: 500; transition: color 0.3s;
         }
-        .nav-link::after {
-            content: ""; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
-            background: var(--dorado); transition: 0.3s;
-        }
-        .nav-link:hover::after { width: 100%; }
         .nav-link:hover { color: var(--dorado); }
 
         .nav-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; position: relative; z-index: 1100; }
-        .nav-toggle span { width: 30px; height: 2px; background: var(--blanco); transition: 0.3s; transform-origin: left; }
+        .nav-toggle span { width: 30px; height: 2px; background: var(--blanco); transition: 0.3s; }
 
         .btn-cta {
             padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 0.85rem;
@@ -157,16 +148,13 @@
             border: none; cursor: pointer; display: inline-block;
         }
         .btn-primary { background: var(--dorado); color: var(--verde-bosque); }
-        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(201, 168, 76, 0.3); }
         .btn-outline { background: transparent; border: 1.5px solid var(--blanco); color: var(--blanco); }
         .btn-outline:hover { background: var(--blanco); color: var(--verde-bosque); }
-        .btn-nav { background: var(--verde-bosque); color: var(--blanco); }
 
-        /* 8. HERO (KEN BURNS) */
+        /* HERO */
         .hero {
             height: 100vh; position: relative; display: flex; flex-direction: column;
-            align-items: center; text-align: center;
-            color: var(--blanco); overflow: hidden;
+            align-items: center; text-align: center; color: var(--blanco); overflow: hidden;
         }
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -174,202 +162,157 @@
                         url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920');
             background-size: cover; background-position: center;
             z-index: -1; animation: kenburns 20s ease-in-out infinite alternate;
-            will-change: transform;
         }
-        @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.15); } }
+        @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.1); } }
 
         .hero-content {
-            display: flex; flex-direction: column; align-items: center;
-            justify-content: flex-start; padding-top: 15vh;
-            width: 100%; height: 100%; position: relative; z-index: 1;
-        }
-        .hero h1 {
-            font-size: 5rem; line-height: 1.3; margin-bottom: 2.5rem;
-            max-width: 950px; text-shadow: 2px 4px 10px rgba(0,0,0,0.3);
-            display: block;
-        }
-        .hero p { font-size: 1.2rem; max-width: 600px; opacity: 0.9; margin-bottom: 40px; }
-        .hero-actions { margin-bottom: 50px; }
-
-        /* Partículas */
-        .particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .particle { position: absolute; background: rgba(255,255,255,0.2); border-radius: 50%; animation: float 10s infinite linear; }
-        @keyframes float { from { transform: translateY(0) rotate(0deg); opacity: 0; } 50% { opacity: 0.5; } to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
-
-        .hero-stats {
-            display: flex; gap: 40px; margin-top: auto;
-            backdrop-filter: blur(10px); background: rgba(255,255,255,0.1);
-            padding: 20px 40px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.2);
+            flex: 1; display: flex; flex-direction: column; align-items: center;
+            justify-content: flex-start; padding-top: 15vh; width: 100%; max-width: 1200px;
             position: relative; z-index: 5;
         }
+        .hero h1 {
+            font-size: clamp(2rem, 5.5vw, 4.5rem); line-height: 1.3; margin-bottom: 2.5rem;
+            max-width: 950px; text-shadow: 2px 4px 10px rgba(0,0,0,0.3);
+            display: block; animation: fadeInUp 1s ease-out;
+        }
+        .hero p {
+            font-size: 1.2rem; max-width: 700px; opacity: 0.9; margin-bottom: 40px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        .hero-actions {
+            margin-bottom: 50px;
+            animation: fadeInUp 1.4s ease-out;
+        }
+
+        .hero-stats {
+            display: flex; gap: 40px; margin-top: auto; margin-bottom: 30px;
+            backdrop-filter: blur(10px); background: rgba(255,255,255,0.1);
+            padding: 20px 40px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.2);
+            position: relative; z-index: 5; animation: fadeInUp 1.6s ease-out;
+        }
         .stat-item { display: flex; flex-direction: column; align-items: center; }
-        .stat-val { font-size: 1.5rem; font-weight: 700; font-family: 'Playfair Display', serif; color: var(--dorado); }
-        .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; display: flex; align-items: center; gap: 5px; }
+        .stat-val { font-size: 1.5rem; font-weight: 700; color: var(--dorado); }
+        .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; }
         .stat-icon { color: var(--dorado); margin-bottom: 5px; }
 
-        .scroll-down { position: absolute; bottom: 30px; animation: bounce 2s infinite; color: var(--blanco); text-decoration: none; font-size: 1.5rem; }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
-
         /* SECTIONS */
-        section { padding: 120px 10%; }
-        .section-header { text-align: center; margin-bottom: 80px; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .section-header h2 { font-size: 3.5rem; color: var(--verde-bosque); margin-bottom: 20px; }
+        section { padding: 100px 10%; }
+        .section-header { text-align: center; margin-bottom: 60px; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .section-header h2 { font-size: clamp(2rem, 4vw, 3.5rem); color: var(--verde-bosque); margin-bottom: 20px; }
         .section-header p { color: #666; font-size: 1.1rem; line-height: 1.6; }
 
         /* GRID */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
         .image-reveal { position: relative; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-deep); }
-        .image-reveal img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--transition-premium); }
-        .image-reveal:hover img { transform: scale(1.05); }
+        .image-reveal img { width: 100%; height: 100%; object-fit: cover; }
         .img-badge { position: absolute; bottom: 30px; right: 30px; background: var(--blanco); padding: 15px 25px; border-radius: 15px; box-shadow: var(--shadow-soft); font-weight: 700; color: var(--verde-bosque); font-size: 0.9rem; }
 
         .feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }
         .feature-item { display: flex; align-items: center; gap: 15px; font-weight: 600; color: var(--verde-bosque); }
-        .feature-icon { width: 40px; height: 40px; background: var(--crema); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .feature-icon { width: 40px; height: 40px; background: var(--crema); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--dorado); }
+
+        /* PROCESO */
+        .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .process-step { text-align: center; position: relative; }
+        .step-number { width: 50px; height: 50px; background: var(--verde-bosque); color: var(--blanco); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; margin: 0 auto 20px; }
+        .process-step h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--verde-bosque); }
+        .process-step p { font-size: 0.9rem; color: #666; line-height: 1.5; }
 
         /* LOTES */
         #lotes { background: var(--crema); }
         .filter-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; }
-        .filter-btn { padding: 10px 25px; border-radius: 50px; border: 1.5px solid var(--verde-bosque); background: transparent; color: var(--verde-bosque); font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .filter-btn { padding: 10px 25px; border-radius: 50px; border: 1.5px solid var(--verde-bosque); background: transparent; color: var(--verde-bosque); font-weight: 600; cursor: pointer; transition: 0.3s; }
         .filter-btn.active { background: var(--verde-bosque); color: var(--blanco); }
 
         .lotes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .lote-card { background: var(--blanco); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-soft); transition: all 0.4s var(--transition-premium); border: 1.5px solid transparent; position: relative; }
-        .lote-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-deep); border-color: var(--verde-claro); }
-        .lote-img { height: 200px; background: var(--verde-medio); display: flex; align-items: center; justify-content: center; position: relative; }
-        .lote-status { position: absolute; top: 15px; right: 15px; padding: 5px 12px; border-radius: 50px; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em; }
+        .lote-card { background: var(--blanco); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-soft); transition: 0.4s; border: 1.5px solid transparent; position: relative; }
+        .lote-card:hover { transform: translateY(-10px); border-color: var(--verde-claro); }
+        .lote-img { height: 200px; background: var(--verde-medio); display: flex; align-items: center; justify-content: center; position: relative; color: white; font-size: 3rem; }
+        .lote-status { position: absolute; top: 15px; right: 15px; padding: 5px 12px; border-radius: 50px; font-size: 0.65rem; font-weight: 800; }
         .status-disponible { background: #E7F5EE; color: var(--verde-medio); }
         .status-reservado { background: #FFF4E5; color: var(--dorado); }
 
         .lote-info { padding: 25px; }
-        .lote-info h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .lote-info h3 { margin-bottom: 10px; }
         .lote-meta { display: flex; justify-content: space-between; color: #666; font-size: 0.9rem; margin-bottom: 20px; }
-        .tag { font-size: 0.7rem; padding: 4px 10px; background: var(--crema); border-radius: 5px; color: var(--verde-bosque); font-weight: 500; margin-right: 5px; }
+        .tag { font-size: 0.7rem; padding: 4px 10px; background: var(--crema); border-radius: 5px; color: var(--verde-bosque); margin-right: 5px; }
 
-        .btn-detail { width: 100%; padding: 12px; border: 1.5px solid var(--verde-medio); border-radius: 10px; background: transparent; color: var(--verde-medio); font-weight: 700; cursor: pointer; transition: all 0.3s; }
-        .btn-detail:hover { background: var(--verde-medio); color: var(--blanco); }
+        .btn-detail { width: 100%; padding: 12px; border: 1.5px solid var(--verde-medio); border-radius: 10px; background: transparent; color: var(--verde-medio); font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-detail:hover:not(:disabled) { background: var(--verde-medio); color: var(--blanco); }
 
-        .lote-card.reservado { pointer-events: none; }
-        .lote-card.reservado .lote-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.45); z-index: 2; display: flex; align-items: center; justify-content: center; opacity: 1; }
+        .lote-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); display: none; align-items: center; justify-content: center; z-index: 2; }
+        .lote-card.reservado .lote-overlay { display: flex; }
         .reservado-label { background: var(--dorado); color: var(--blanco); padding: 10px 20px; border-radius: 10px; font-weight: 800; transform: rotate(-5deg); }
 
-        /* MASONRY GALLERY */
-        .masonry-grid { columns: 4 250px; column-gap: 20px; }
-        .gallery-item { break-inside: avoid; margin-bottom: 20px; border-radius: 15px; overflow: hidden; position: relative; height: 350px; cursor: pointer; }
-        .gallery-item:nth-child(even) { height: 450px; }
-        .gallery-item img { width: 100%; height: 125%; object-fit: cover; position: absolute; top: -12.5%; transition: transform 0.1s linear; will-change: transform; }
-        .gallery-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(27,67,50,0.6); opacity: 0; display: flex; align-items: center; justify-content: center; transition: 0.4s; }
-        .gallery-item:hover .gallery-overlay { opacity: 1; }
-
-        /* INVEST SECTION (7) */
+        /* INVEST */
         .cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-        .invest-card { padding: 50px; border: 1.5px solid #eee; border-radius: 20px; transition: all 0.4s var(--transition-premium); text-align: center; }
-        .invest-card:hover { border-color: var(--verde-claro); background: #fdfdfd; transform: translateY(-10px); }
-        .invest-card i { font-size: 3rem; color: var(--verde-bosque); margin-bottom: 30px; display: block; transition: color 0.4s; }
-        .invest-card:hover i { color: var(--dorado); }
-        .invest-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--verde-bosque); }
-        .invest-card p { color: #666; line-height: 1.6; }
+        .invest-card { padding: 40px; border: 1.5px solid #eee; border-radius: 20px; text-align: center; transition: 0.4s; }
+        .invest-card:hover { transform: translateY(-10px); border-color: var(--verde-claro); }
+        .invest-card i { font-size: 3rem; color: var(--verde-bosque); margin-bottom: 20px; display: block; }
 
-        /* TESTIMONIOS (8) */
+        /* TESTIMONIOS */
         #testimonios { background: var(--crema); overflow: hidden; }
-        .swiper { padding: 50px 0 100px; }
-        .test-card { background: var(--blanco); padding: 50px; border-radius: 25px; box-shadow: var(--shadow-soft); text-align: center; max-width: 600px; margin: 0 auto; }
-        .stars { color: var(--dorado); margin-bottom: 20px; font-size: 1.2rem; }
-        .test-text { font-style: italic; font-size: 1.2rem; margin-bottom: 30px; line-height: 1.7; color: var(--verde-bosque); }
-        .test-author { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-        .author-avatar { width: 60px; height: 60px; border-radius: 50%; background: var(--verde-medio); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .test-card { background: var(--blanco); padding: 40px; border-radius: 25px; text-align: center; max-width: 600px; margin: 0 auto; box-shadow: var(--shadow-soft); }
+        .stars { color: var(--dorado); margin-bottom: 15px; }
 
-        /* UBICACION */
+        /* GALLERY */
+        .masonry-grid { columns: 4 250px; column-gap: 20px; }
+        .gallery-item { break-inside: avoid; margin-bottom: 20px; border-radius: 15px; overflow: hidden; height: 350px; cursor: pointer; position: relative; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        /* MAPA */
         #ubicacion { background: var(--verde-bosque); color: var(--blanco); padding: 0; display: grid; grid-template-columns: 40% 60%; align-items: center; }
-        .location-info { padding: 100px 15%; }
-        .location-info h2 { font-size: 3rem; margin-bottom: 30px; color: var(--blanco); }
-        .location-list { list-style: none; }
-        .location-list li { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; opacity: 0.9; }
-        .location-list i { font-size: 1.2rem; color: var(--dorado); }
-        #map { height: 650px; width: 100%; filter: grayscale(1) invert(0.9) sepia(0.2) hue-rotate(90deg) brightness(0.8); }
+        .location-info { padding: 80px 10%; }
+        #map { height: 500px; width: 100%; filter: grayscale(1) invert(0.9); }
 
-        /* PROCESO SECTION */
-        #proceso { background: var(--blanco); }
-        .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
-        .process-step { text-align: center; position: relative; }
-        .step-number { width: 50px; height: 50px; background: var(--verde-bosque); color: var(--blanco); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; margin: 0 auto 20px; position: relative; z-index: 2; }
-        .process-step:not(:last-child)::after { content: ""; position: absolute; top: 25px; left: 50%; width: 100%; height: 2px; background: #eee; z-index: 1; }
-        .process-step h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--verde-bosque); }
-        .process-step p { font-size: 0.9rem; color: #666; line-height: 1.5; }
-
-        /* FAQ SECTION */
+        /* FAQ */
         .faq-grid { max-width: 800px; margin: 0 auto; }
-        .faq-item { background: var(--blanco); border-radius: 15px; margin-bottom: 15px; overflow: hidden; border: 1px solid #eee; transition: 0.3s; }
+        .faq-item { background: var(--blanco); border-radius: 15px; margin-bottom: 15px; border: 1px solid #eee; overflow: hidden; }
         .faq-question { padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; color: var(--verde-bosque); }
-        .faq-answer { padding: 0 30px; max-height: 0; overflow: hidden; transition: max-height 0.4s var(--transition-premium), padding 0.4s; color: #666; line-height: 1.6; }
-        .faq-item.active { border-color: var(--verde-claro); box-shadow: var(--shadow-soft); }
+        .faq-answer { padding: 0 30px; max-height: 0; overflow: hidden; transition: max-height 0.4s; color: #666; line-height: 1.6; }
         .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 25px; }
-        .faq-icon { transition: transform 0.3s; }
-        .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-        /* CONTACTO & FORM VALIDATION */
-        #contacto { background: linear-gradient(135deg, var(--verde-bosque) 0%, var(--verde-medio) 100%); color: var(--blanco); position: relative; }
-        .contact-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center; }
-        .form-card { padding: 50px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border-radius: 20px; border: 0.5px solid rgba(255, 255, 255, 0.1); position: relative; }
-
-        .form-group { position: relative; margin-bottom: 30px; }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; background: transparent; border: none; border-bottom: 1.5px solid rgba(255,255,255,0.3);
-            padding: 12px 30px 12px 0; color: var(--blanco); outline: none; transition: 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
+        /* CONTACTO */
+        #contacto { background: linear-gradient(135deg, var(--verde-bosque) 0%, var(--verde-medio) 100%); color: var(--blanco); }
+        .form-card { padding: 40px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border-radius: 20px; border: 0.5px solid rgba(255, 255, 255, 0.1); }
+        .form-group { position: relative; margin-bottom: 25px; }
+        .form-group input, .form-group textarea { width: 100%; background: transparent; border: none; border-bottom: 1.5px solid rgba(255,255,255,0.3); padding: 12px 0; color: var(--blanco); outline: none; }
         .form-group label { position: absolute; top: 12px; left: 0; pointer-events: none; transition: 0.3s; opacity: 0.6; }
         .form-group input:focus + label, .form-group input:not(:placeholder-shown) + label { top: -15px; font-size: 0.75rem; color: var(--dorado); opacity: 1; }
 
-        /* Icons check/cross using :has and ::after on form-group */
-        .form-group::after {
-            position: absolute; right: 0; top: 12px; font-size: 1.2rem; transition: 0.3s;
-            pointer-events: none; line-height: 1;
-        }
-        .form-group:has(input:not(:placeholder-shown):valid)::after { content: "✓"; color: var(--success); }
-        .form-group:has(input:not(:placeholder-shown):invalid)::after { content: "✕"; color: var(--error); }
-        .form-group:has(input:focus)::after { opacity: 0; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+        .shake { animation: shake 0.3s ease-in-out; }
 
-        .form-group input:not(:placeholder-shown):valid { border-bottom-color: var(--success); }
-        .form-group input:not(:placeholder-shown):invalid { border-bottom-color: var(--error); }
+        .form-group:has(input:not(:placeholder-shown):valid)::after { content: "✓"; color: var(--success); position: absolute; right: 0; top: 12px; }
+        .form-group:has(input:not(:placeholder-shown):invalid)::after { content: "✕"; color: var(--error); position: absolute; right: 0; top: 12px; }
 
-        /* Shake animation */
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-8px); } 80% { transform: translateX(8px); } }
-        .shake { animation: shake 0.4s ease-in-out; }
-
-        .btn-submit { background: var(--dorado); color: var(--verde-bosque); border: none; padding: 18px; width: 100%; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.4s; }
+        .btn-submit { background: var(--dorado); color: var(--verde-bosque); border: none; padding: 18px; width: 100%; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; }
         .btn-submit:hover { background: var(--blanco); transform: translateY(-5px); }
 
         /* FOOTER */
-        footer { background: #0F2318; color: rgba(255,255,255,0.6); padding: 100px 10% 40px; }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; font-size: 0.8rem; }
+        footer { background: #0F2318; color: rgba(255,255,255,0.6); padding: 80px 10% 40px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: inherit; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--dorado); }
 
         /* MODALS */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(27,67,50,0.95); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.5s; backdrop-filter: blur(10px); }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.5s; backdrop-filter: blur(10px); }
         .modal.active { display: flex; opacity: 1; }
-        .modal-content { background: var(--blanco); width: 95%; max-width: 900px; border-radius: 30px; overflow: hidden; position: relative; }
-        .modal-close { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; z-index: 10; color: var(--verde-bosque); }
+        .modal-content { background: var(--blanco); width: 95%; max-width: 900px; border-radius: 20px; overflow: hidden; position: relative; }
+        .modal-close { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--verde-bosque); z-index: 10; }
 
-        /* VIDEO MODAL */
-        .video-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; display: none; align-items: center; justify-content: center; }
-        .video-container { width: 90%; max-width: 1000px; aspect-ratio: 16/9; position: relative; border: 4px solid var(--dorado); border-radius: 15px; overflow: hidden; }
+        .video-container { width: 90%; max-width: 1000px; aspect-ratio: 16/9; position: relative; border: 4px solid var(--dorado); border-radius: 10px; overflow: hidden; }
         .video-container iframe { width: 100%; height: 100%; }
-        .video-close { position: absolute; top: -50px; right: 0; color: white; font-size: 2.5rem; cursor: pointer; }
 
         /* WHATSAPP */
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); z-index: 999; transition: 0.3s; text-decoration: none; animation: pulse-whatsapp 2s infinite; }
-        .whatsapp-float:hover { transform: scale(1.1); }
-        @keyframes pulse-whatsapp { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 999; text-decoration: none; animation: pulse-wa 2s infinite; }
 
         /* RESPONSIVE */
-        @media (max-width: 1024px) { h1 { font-size: 4rem; } .grid-2, .lotes-grid, .contact-container, #ubicacion, .process-grid, .cards-3 { grid-template-columns: 1fr; gap: 50px; } }
-        @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            .nav-toggle { display: flex; }
-            .nav-links { position: fixed; top: -100%; left: 0; width: 100%; height: 100vh; background: var(--verde-bosque); flex-direction: column; justify-content: center; transition: 0.6s var(--transition-premium); z-index: 1000; }
-            .nav-links.active { top: 0; }
-        }
+        @media (max-width: 1024px) { .grid-2, .lotes-grid, .cards-3, #ubicacion, .process-grid, .footer-grid { grid-template-columns: 1fr; gap: 40px; } .hero h1 { font-size: 3rem; } .hero-stats { flex-wrap: wrap; border-radius: 20px; } }
+        @media (max-width: 768px) { .nav-links { display: none; } .nav-toggle { display: flex; } }
     </style>
 </head>
 <body>
@@ -385,19 +328,15 @@
     <!-- Navbar -->
     <nav id="navbar">
         <a href="#" class="logo">
-            <svg width="40" height="40" viewBox="0 0 40 40">
-                <circle cx="20" cy="20" r="20" fill="#1B4332"/>
-                <path d="M20 10C20 10 12 18 12 24C12 28.4183 15.5817 32 20 32C24.4183 32 28 28.4183 28 24C28 18 20 10 20 10Z" fill="#52B788"/>
-            </svg>
+            <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="#1B4332"/><path d="M20 10C20 10 12 18 12 24C12 28.4183 15.5817 32 20 32C24.4183 32 28 28.4183 28 24C28 18 20 10 20 10Z" fill="#52B788"/></svg>
             <div class="logo-text"><h2>Costa Mantagua</h2><span>Parcelas Exclusivas</span></div>
         </a>
-        <div class="nav-links" id="navLinks">
-            <a href="#proyecto" class="nav-link" onclick="closeNav()">El Proyecto</a>
-            <a href="#lotes" class="nav-link" onclick="closeNav()">Lotes</a>
-            <a href="#proceso" class="nav-link" onclick="closeNav()">Proceso</a>
-            <a href="#ubicacion" class="nav-link" onclick="closeNav()">Ubicación</a>
-            <a href="#galeria" class="nav-link" onclick="closeNav()">Galería</a>
-            <a href="#contacto" class="btn-cta btn-primary btn-nav" onclick="closeNav()">Cotizar ahora</a>
+        <div class="nav-links">
+            <a href="#proyecto" class="nav-link">El Proyecto</a>
+            <a href="#lotes" class="nav-link">Lotes</a>
+            <a href="#proceso" class="nav-link">Proceso</a>
+            <a href="#ubicacion" class="nav-link">Ubicación</a>
+            <a href="#contacto" class="btn-cta btn-primary">Cotizar ahora</a>
         </div>
         <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
     </nav>
@@ -405,16 +344,14 @@
     <!-- Hero -->
     <header class="hero">
         <div class="hero-bg"></div>
-        <div class="particles" id="particles"></div>
         <div class="hero-content">
-            <div class="reveal-container">
-                <h1 class="reveal-text">Naturaleza, exclusividad e inversión segura en el corazón de la Quinta Región</h1>
-            </div>
-            <div class="hero-actions" data-aos="fade-up" data-aos-delay="600">
+            <h1>Naturaleza, exclusividad e inversión segura en el corazón de la Quinta Región</h1>
+            <p>Parcelas residenciales de alto nivel en Mantagua. Vive la tranquilidad que siempre soñaste a minutos del mar.</p>
+            <div class="hero-actions">
                 <a href="#lotes" class="btn-cta btn-primary">Ver lotes disponibles →</a>
                 <button class="btn-cta btn-outline" style="margin-left: 20px;" onclick="openVideo('P_N384C6PGA')">▶ Ver el proyecto</button>
             </div>
-            <div class="hero-stats" data-aos="fade-up" data-aos-delay="800">
+            <div class="hero-stats">
                 <div class="stat-item">
                     <svg class="stat-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                     <span class="stat-val" data-target="24">0</span><span class="stat-label">Lotes</span>
@@ -436,7 +373,7 @@
                 </div>
             </div>
         </div>
-        <a href="#proyecto" class="scroll-down">
+        <a href="#proyecto" class="scroll-down" style="position: absolute; bottom: 30px; color: white; text-decoration: none; animation: bounce 2s infinite;">
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"></path></svg>
         </a>
     </header>
@@ -446,33 +383,23 @@
         <div class="grid-2">
             <div data-aos="fade-right">
                 <span class="badge">Sobre el proyecto</span>
-                <h2 class="playfair" style="font-size: 3.5rem; margin-bottom: 20px;">Vive rodeado de naturaleza costera</h2>
-                <p style="margin-bottom: 30px; font-size: 1.1rem; line-height: 1.8; color: #555;">
-                    Costa Mantagua es uno de los últimos rincones vírgenes de la costa central chilena. A solo 8 minutos de la playa y 90 minutos de Santiago, ofrecemos lotes residenciales en un entorno natural privilegiado, con todos los servicios y la tranquilidad que buscas.
-                </p>
+                <h2 class="playfair">Vive rodeado de naturaleza costera</h2>
+                <p style="margin: 20px 0; line-height: 1.8; color: #555;">Costa Mantagua es uno de los últimos rincones vírgenes de la costa central chilena. A solo 8 minutos de la playa y 90 minutos de Santiago, ofrecemos lotes residenciales en un entorno natural privilegiado.</p>
                 <div class="feature-list">
                     <div class="feature-item">
-                        <div class="feature-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="2"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.5 0 2.5 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.5 0 2.5 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.5 0 2.5 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
-                        </div>
+                        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="2"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.5 0 2.5 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.5 0 2.5 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.5 0 2.5 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg></div>
                         A 8 min del mar
                     </div>
                     <div class="feature-item">
-                        <div class="feature-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="2"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
-                        </div>
+                        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="2"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg></div>
                         Vista a cerros
                     </div>
                     <div class="feature-item">
-                        <div class="feature-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="2"><path d="M12 20V10"/><path d="M18 10c0-4.418-2.686-8-6-8s-6 3.582-6 8a8 8 0 0 0 3.328 6.607C10.158 17.5 12 19 12 19s1.842-1.5 2.672-2.393A8 8 0 0 0 18 10z"/></svg>
-                        </div>
+                        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="2"><path d="M12 20V10"/><path d="M18 10c0-4.418-2.686-8-6-8s-6 3.582-6 8a8 8 0 0 0 3.328 6.607C10.158 17.5 12 19 12 19s1.842-1.5 2.672-2.393A8 8 0 0 0 18 10z"/></svg></div>
                         Áreas comunes
                     </div>
                     <div class="feature-item">
-                        <div class="feature-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                        </div>
+                        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
                         Luz y Agua
                     </div>
                 </div>
@@ -484,7 +411,7 @@
         </div>
     </section>
 
-    <!-- Proceso de Compra -->
+    <!-- Proceso -->
     <section id="proceso">
         <div class="section-header">
             <span class="badge">Inversión</span>
@@ -590,32 +517,20 @@
         </div>
     </section>
 
-    <!-- Por qué Invertir (7) -->
+    <!-- Invertir -->
     <section id="invertir">
         <div class="section-header">
             <h2>¿Por qué invertir en Costa Mantagua?</h2>
             <p>Una oportunidad única en la zona de mayor crecimiento de la Quinta Región.</p>
         </div>
         <div class="cards-3">
-            <div class="invest-card" data-aos="fade-up">
-                <i>📈</i>
-                <h3>Plusvalía estratégica</h3>
-                <p>La V Región es la zona de mayor crecimiento inmobiliario fuera de Santiago. Costa Mantagua ofrece una oportunidad de inversión con alto potencial de retorno.</p>
-            </div>
-            <div class="invest-card" data-aos="fade-up" data-aos-delay="100">
-                <i>🏖️</i>
-                <h3>Calidad de vida</h3>
-                <p>Playa, cerros y naturaleza virgen a 90 minutos de la capital. El equilibrio perfecto entre ciudad y campo para tu familia.</p>
-            </div>
-            <div class="invest-card" data-aos="fade-up" data-aos-delay="200">
-                <i>🔒</i>
-                <h3>Inversión segura</h3>
-                <p>Proyecto con recepción municipal, escrituras al día y título de dominio limpio (Rol Propio SAG). Transparencia total legal.</p>
-            </div>
+            <div class="invest-card" data-aos="fade-up"><i>📈</i><h3>Alta plusvalía histórica</h3><p>La V Región es la zona de mayor crecimiento inmobiliario fuera de Santiago. Costa Mantagua ofrece una oportunidad de inversión con alto retorno.</p></div>
+            <div class="invest-card" data-aos="fade-up" data-aos-delay="100"><i>🏖️</i><h3>Calidad de vida</h3><p>Playa, cerros y naturaleza virgen a 90 minutos de la capital. El equilibrio perfecto entre ciudad y campo para tu familia.</p></div>
+            <div class="invest-card" data-aos="fade-up" data-aos-delay="200"><i>🔒</i><h3>Inversión segura</h3><p>Proyecto con recepción municipal, escrituras al día y título de dominio limpio (Rol Propio SAG). Transparencia total legal.</p></div>
         </div>
     </section>
 
-    <!-- Testimonios (8) -->
+    <!-- Testimonios -->
     <section id="testimonios">
         <div class="section-header">
             <span class="badge">Testimonios</span>
@@ -627,33 +542,14 @@
                     <div class="test-card">
                         <div class="stars">★★★★★</div>
                         <p class="test-text">"Compramos nuestro lote hace 6 meses y ya vemos cómo la zona se está desarrollando. Estamos muy felices con la decisión."</p>
-                        <div class="test-author">
-                            <div class="author-avatar">CM</div>
-                            <strong>Carlos y María R.</strong>
-                            <span>Santiago</span>
-                        </div>
+                        <div class="test-author"><strong>Carlos y María R.</strong></div>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="test-card">
                         <div class="stars">★★★★★</div>
                         <p class="test-text">"El proceso de compra fue transparente y rápido. En 30 días teníamos la escritura lista. Muy profesionales."</p>
-                        <div class="test-author">
-                            <div class="author-avatar">RM</div>
-                            <strong>Rodrigo M.</strong>
-                            <span>Viña del Mar</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="test-card">
-                        <div class="stars">★★★★★</div>
-                        <p class="test-text">"Buscábamos un lugar para construir nuestra casa de campo. Costa Mantagua superó todas nuestras expectativas."</p>
-                        <div class="test-author">
-                            <div class="author-avatar">FS</div>
-                            <strong>Familia Soto</strong>
-                            <span>Las Condes</span>
-                        </div>
+                        <div class="test-author"><strong>Rodrigo M.</strong></div>
                     </div>
                 </div>
             </div>
@@ -665,29 +561,28 @@
     <section id="galeria">
         <div class="section-header"><h2>El entorno natural</h2></div>
         <div class="masonry-grid">
-            <div class="gallery-item" onclick="openLightbox(0)"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800" alt="Bosque"></div>
-            <div class="gallery-item" onclick="openLightbox(1)"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600" alt="Costa"></div>
-            <div class="gallery-item" onclick="openLightbox(2)"><img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=600" alt="Río"></div>
-            <div class="gallery-item" onclick="openLightbox(3)"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=800" alt="Selva"></div>
-            <div class="gallery-item" onclick="openLightbox(4)"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600" alt="Montaña"></div>
-            <div class="gallery-item" onclick="openLightbox(5)"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600" alt="Campo"></div>
-            <div class="gallery-item" onclick="openLightbox(6)"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600" alt="Lago"></div>
-            <div class="gallery-item" onclick="openLightbox(7)"><img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200" alt="Valle"></div>
+            <div class="gallery-item" onclick="openLightbox(0)"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800" alt="Bosque" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox(1)"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600" alt="Costa" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox(2)"><img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=600" alt="Selva" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox(3)"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=800" alt="Selva" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox(4)"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600" alt="Montaña" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox(5)"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600" alt="Campo" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox(6)"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600" alt="Lago" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox(7)"><img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200" alt="Valle" loading="lazy"></div>
         </div>
     </section>
 
     <!-- Ubicación -->
     <section id="ubicacion">
         <div class="location-info" data-aos="fade-right">
-            <span class="badge" style="color:white;">Ubicación privilegiada</span>
-            <h2>En el corazón de Costa Mantagua</h2>
+            <h2>Ubicación Privilegiada</h2>
             <ul class="location-list">
                 <li>📍 Costa Mantagua, Quintero, V Región</li>
                 <li>🚗 90 min desde Santiago</li>
                 <li>🌊 8 min hasta la playa</li>
                 <li>🏪 Servicios en Concón a 15 min</li>
             </ul>
-            <a href="https://www.google.com/maps?q=-32.7833,-71.4500" target="_blank" class="btn-cta btn-primary" style="margin-top:40px;">Cómo llegar →</a>
+            <a href="https://www.google.com/maps?q=-32.7833,-71.4500" target="_blank" rel="noopener noreferrer" class="btn-cta btn-primary">Cómo llegar →</a>
         </div>
         <div id="map"></div>
     </section>
@@ -697,37 +592,37 @@
         <div class="section-header"><h2>Preguntas Frecuentes</h2></div>
         <div class="faq-grid">
             <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">¿Las parcelas cuentan con Rol propio? <span class="faq-icon">▼</span></div>
+                <div class="faq-question">¿Las parcelas cuentan con Rol propio? <span>▼</span></div>
                 <div class="faq-answer">Sí, todas nuestras parcelas cuentan con Rol único otorgado por el SAG e inscrito en el Conservador de Bienes Raíces.</div>
             </div>
             <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">¿Cómo es el suministro de agua y luz? <span class="faq-icon">▼</span></div>
-                <div class="faq-answer">El proyecto cuenta con factibilidad eléctrica (empresa local) y el suministro de agua se realiza mediante solución aprobada por pozo profundo o camión aljibe según corresponda.</div>
+                <div class="faq-question">¿Cómo es el suministro de agua y luz? <span>▼</span></div>
+                <div class="faq-answer">El proyecto cuenta con factibilidad eléctrica y suministro de agua mediante solución aprobada por pozo profundo o camión aljibe.</div>
             </div>
             <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">¿Qué tipo de uso de suelo tienen? <span class="faq-icon">▼</span></div>
-                <div class="faq-answer">Son suelos de uso residencial, lo que permite la construcción de vivienda y obras complementarias según la normativa vigente de loteos rurales.</div>
+                <div class="faq-question">¿Qué tipo de uso de suelo tienen? <span>▼</span></div>
+                <div class="faq-answer">Son suelos de uso residencial, permitiendo la construcción de vivienda y obras complementarias según normativa.</div>
             </div>
             <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">¿Se puede comprar con crédito hipotecario? <span class="faq-icon">▼</span></div>
-                <div class="faq-answer">Sí, trabajamos con instituciones financieras para créditos de fines generales o crédito directo según evaluación comercial del cliente.</div>
+                <div class="faq-question">¿Se puede comprar con crédito hipotecario? <span>▼</span></div>
+                <div class="faq-answer">Sí, trabajamos con instituciones financieras para créditos de fines generales o crédito directo según evaluación.</div>
             </div>
             <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">¿Cuál es la distancia a servicios básicos? <span class="faq-icon">▼</span></div>
-                <div class="faq-answer">Estamos a tan solo 15 minutos de Concón, donde encuentras centros de salud, supermercados, colegios de primer nivel y todo tipo de comercio.</div>
+                <div class="faq-question">¿Cuál es la distancia a servicios básicos? <span>▼</span></div>
+                <div class="faq-answer">Estamos a tan solo 15 minutos de Concón, donde encuentras salud, supermercados y colegios.</div>
             </div>
         </div>
     </section>
 
     <!-- Contacto -->
     <section id="contacto">
-        <div class="contact-container">
-            <div class="contact-info" data-aos="fade-right">
-                <h2 class="playfair" style="font-size:3.5rem; margin-bottom:20px;">Conversemos hoy.</h2>
+        <div class="contact-container" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center;">
+            <div data-aos="fade-right">
+                <h2 class="playfair" style="font-size: 3rem; margin-bottom: 20px;">Conversemos hoy.</h2>
                 <p>Nuestros ejecutivos te contactarán en menos de 24 horas.</p>
-                <div style="margin-top:40px;">
-                    <p>📞 +56 9 8765 4321</p>
-                    <p>📧 ventas@costamantagua.cl</p>
+                <div style="margin-top: 40px;">
+                    <p><a href="tel:+56987654321" style="color:white; text-decoration:none;">📞 +56 9 8765 4321</a></p>
+                    <p><a href="mailto:ventas@costamantagua.cl" style="color:white; text-decoration:none;">📧 ventas@costamantagua.cl</a></p>
                 </div>
             </div>
             <div class="form-card" data-aos="fade-left">
@@ -735,7 +630,7 @@
                     <div class="form-group"><input type="text" id="nombre" placeholder=" " required><label>Nombre completo *</label></div>
                     <div class="form-group"><input type="email" id="email" placeholder=" " required><label>Email *</label></div>
                     <div class="form-group"><input type="tel" id="telefono" placeholder=" " required pattern="(\+56|56)?9[0-9]{8}"><label>Teléfono *</label></div>
-                    <button type="submit" class="btn-submit btn-cta">Quiero que me contacten →</button>
+                    <button type="submit" class="btn-submit">Quiero que me contacten →</button>
                 </form>
                 <div id="successMsg" style="display:none; text-align:center; padding:40px;">
                     <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -745,64 +640,58 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="footer-grid">
             <div><h2 class="playfair" style="color:var(--dorado)">Costa Mantagua</h2><p>Invierte en naturaleza. Vive diferente.</p></div>
-            <div><h4>Proyecto</h4><p><a href="#proyecto" style="color:inherit; text-decoration:none;">Sobre nosotros</a></p></div>
+            <div><h4>Proyecto</h4>
+                <ul class="footer-links">
+                    <li><a href="#proyecto">Sobre nosotros</a></li>
+                    <li><a href="#lotes">Lotes disponibles</a></li>
+                </ul>
+            </div>
             <div><h4>Legal</h4>
-                <p><a href="javascript:void(0)" onclick="openLegal('terminos')" style="color:inherit; text-decoration:none;">Términos y condiciones</a></p>
-                <p><a href="javascript:void(0)" onclick="openLegal('privacidad')" style="color:inherit; text-decoration:none;">Política de privacidad</a></p>
+                <ul class="footer-links">
+                    <li><a href="javascript:void(0)" onclick="openLegal('terminos')">Términos y condiciones</a></li>
+                    <li><a href="javascript:void(0)" onclick="openLegal('privacidad')">Política de privacidad</a></li>
+                </ul>
             </div>
-            <div><h4>Contacto</h4>
-                <p><a href="tel:+56987654321" style="color:inherit; text-decoration:none;">📞 +56 9 8765 4321</a></p>
-                <p><a href="mailto:ventas@costamantagua.cl" style="color:inherit; text-decoration:none;">📧 ventas@costamantagua.cl</a></p>
-                <p>📍 Mantagua, V Región</p>
-            </div>
+            <div><h4>Ubicación</h4><p>Mantagua, Quintero, V Región</p></div>
         </div>
-        <div class="footer-bottom">© 2026 Costa Mantagua Parcelas Exclusivas.</div>
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center;">© 2026 Costa Mantagua. Todos los derechos reservados.</div>
     </footer>
 
-    <!-- Video Modal -->
-    <div id="videoModal" class="video-modal" onclick="closeVideo()">
-        <div class="video-container">
-            <span class="video-close" onclick="closeVideo()">&times;</span>
-            <iframe id="videoPlayer" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
+    <!-- Modals -->
+    <div id="videoModal" class="modal" onclick="closeVideo()">
+        <div class="video-container"><iframe id="videoPlayer" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
     </div>
 
-    <!-- Lightbox -->
-    <div id="lightbox" class="modal" onclick="closeLightbox()" style="background:rgba(0,0,0,0.95)">
-        <img id="lightbox-img" src="" style="max-width:90%; max-height:90%; border:5px solid white;">
-    </div>
-
-    <!-- Modal Lote -->
     <div id="loteModal" class="modal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal()">&times;</span>
-            <div style="display:grid; grid-template-columns: 1fr 1fr;">
-                <div style="background:var(--verde-bosque); color:white; padding:60px;">
-                    <h2 id="modalTitle" class="playfair" style="font-size:2.5rem; margin-bottom:20px;">Lote</h2>
-                    <p id="modalDesc" style="font-size:1.2rem; opacity:0.8; margin-bottom: 20px;">Superficie: 0 m²</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr;">
+                <div style="background: var(--verde-bosque); color: white; padding: 60px;">
+                    <h2 id="modalTitle" class="playfair" style="font-size: 2.5rem; margin-bottom: 20px;">Lote</h2>
+                    <p id="modalDesc" style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 20px;">Superficie: 0 m²</p>
                     <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; font-size: 0.9rem;">
                         <p style="margin-bottom:10px;">✓ Rol Propio SAG</p>
                         <p style="margin-bottom:10px;">✓ Factibilidad Eléctrica</p>
                         <p>✓ Solución de Agua</p>
                     </div>
                 </div>
-                <div style="padding:60px;">
-                    <h3 class="playfair" style="margin-bottom:20px; color:var(--verde-bosque);">Solicitar cotización</h3>
-                    <form onsubmit="event.preventDefault(); alert('Solicitud para ' + document.getElementById('modalTitle').innerText + ' enviada con éxito. Te contactaremos pronto.'); closeModal();">
-                        <div class="form-group"><input type="text" placeholder=" " required style="border-bottom:1px solid #ddd; color:#333;"><label style="color:#999;">Nombre completo *</label></div>
-                        <div class="form-group"><input type="email" placeholder=" " required style="border-bottom:1px solid #ddd; color:#333;"><label style="color:#999;">Email *</label></div>
-                        <div class="form-group"><input type="tel" placeholder=" " required pattern="(\+56|56)?9[0-9]{8}" style="border-bottom:1px solid #ddd; color:#333;"><label style="color:#999;">Teléfono *</label></div>
-                        <button type="submit" class="btn-submit btn-cta">Enviar solicitud →</button>
+                <div style="padding: 60px;">
+                    <h3 class="playfair" style="margin-bottom: 20px; color: var(--verde-bosque);">Solicitar cotización</h3>
+                    <form onsubmit="event.preventDefault(); alert('Solicitud enviada para ' + document.getElementById('modalTitle').innerText); closeModal();">
+                        <div class="form-group"><input type="text" placeholder=" " required style="border-bottom: 1px solid #ddd; color: #333;"><label style="color: #999;">Nombre completo *</label></div>
+                        <div class="form-group"><input type="email" placeholder=" " required style="border-bottom: 1px solid #ddd; color: #333;"><label style="color: #999;">Email *</label></div>
+                        <div class="form-group"><input type="tel" placeholder=" " required pattern="(\+56|56)?9[0-9]{8}" style="border-bottom: 1px solid #ddd; color: #333;"><label style="color: #999;">Teléfono *</label></div>
+                        <button type="submit" class="btn-submit">Enviar solicitud →</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Legal Modal -->
     <div id="legalModal" class="modal">
         <div class="modal-content" style="padding: 60px; max-height: 80vh; overflow-y: auto; display: block;">
             <span class="modal-close" onclick="closeLegal()">&times;</span>
@@ -810,10 +699,9 @@
         </div>
     </div>
 
-    <!-- WhatsApp -->
-    <a href="https://wa.me/56987654321" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12.031 6.172c-2.32 0-4.519.903-6.16 2.544-1.64 1.64-2.543 3.838-2.543 6.158 0 1.299.28 2.57.823 3.73l-1.076 3.928 4.02-1.055c1.12.577 2.373.882 3.655.882 2.32 0 4.519-.903 6.16-2.544 1.64-1.64 2.543-3.839 2.543-6.158s-.903-4.518-2.543-6.158c-1.64-1.64-3.84-2.543-6.16-2.543zm5.42 10.42c-.243.682-1.462 1.24-2.042 1.318-.58.077-1.103.1-.314-.232-.733-.312-3.115-1.373-3.115-1.373-.133-.06-.24-.136-.324-.225-.26-.277-.38-.633-.338-1.01.03-.27.13-.532.296-.757 0 0 .044-.06.07-.09.027-.03.05-.058.07-.083.076-.086.13-.13.13-.13.165-.178.434-.188.614-.027 0 0 .425.432.554.58.13.146.13.243.03.434-.097.193-.097.31-.03.433.065.122.257.433.553.7.437.4 1.054.665 1.547.785.493.12 1.15.114 1.543-.19.193-.15.425-.512.553-.7.13-.19.13-.31 0-.434-.13-.122-.843-.513-.843-.513-.194-.12-.323-.12-.518 0-.195.12-.29.19-.485.41-.194.225-.26.26-.453.122-.194-.137-.816-.312-1.554-.98-.57-.514-.955-1.15-1.066-1.36-.11-.213-.01-.326.095-.432.096-.096.194-.225.29-.338.097-.113.13-.193.194-.323.065-.13.033-.242-.016-.34-.05-.095-.453-1.096-.615-1.49-.16-.395-.323-.334-.453-.334s-.26 0-.422.016c-.162.016-.422.08-.65.32-.224.24-.87.854-.87 2.084s.896 2.416 1.025 2.59c.125.176 1.764 2.693 4.274 3.774.59.256 1.05.41 1.41.524.598.19 1.143.163 1.57.098.48-.073 1.464-.598 1.673-1.176.21-.578.21-1.07.147-1.176-.063-.106-.23-.17-.486-.296z"/></svg>
-    </a>
+    <div id="lightbox" class="modal" onclick="closeLightbox()"><img id="lightbox-img" src="" style="max-width: 90%; max-height: 90%; border: 5px solid white;"></div>
+
+    <a href="https://wa.me/56987654321" class="whatsapp-float" target="_blank" rel="noopener noreferrer">WA</a>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -822,168 +710,80 @@
 
     <script>
         window.addEventListener('load', () => {
-            const loading = document.getElementById('loading');
-            loading.style.opacity = '0';
-            setTimeout(() => loading.style.display = 'none', 800);
+            document.getElementById('loading').style.opacity = '0';
+            setTimeout(() => document.getElementById('loading').style.display = 'none', 800);
             AOS.init({ duration: 800, once: true });
 
-            // Split-text Reveal Observer
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        revealObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.reveal-container').forEach(container => {
-                revealObserver.observe(container);
-            });
-
-            // Initialize Swiper
             new Swiper('.swiper', {
                 loop: true,
                 autoplay: { delay: 5000 },
                 pagination: { el: '.swiper-pagination', clickable: true },
-                slidesPerView: 1,
-                spaceBetween: 30
+                slidesPerView: 1
             });
         });
 
-        // NAVBAR SCROLL
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.pageYOffset > 100) nav.classList.add('scrolled');
             else nav.classList.remove('scrolled');
-
-            // Gallery Parallax
-            const galleryImgs = document.querySelectorAll('.gallery-item img');
-            galleryImgs.forEach(img => {
-                const rect = img.parentElement.getBoundingClientRect();
-                const offset = window.innerHeight - rect.top;
-                if (offset > 0 && rect.top < window.innerHeight) {
-                    img.style.transform = `translateY(${(offset * 0.05) - 20}px)`;
-                }
-            });
         });
 
-        function closeNav() {
-            document.getElementById('navLinks').classList.remove('active');
-        }
-
-        // MOBILE NAV TOGGLE
-        document.getElementById('navToggle').addEventListener('click', () => {
-            document.getElementById('navLinks').classList.toggle('active');
-        });
-
-        // VIDEO
         function openVideo(id) {
             document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${id}?autoplay=1`;
-            document.getElementById('videoModal').style.display = 'flex';
+            document.getElementById('videoModal').classList.add('active');
         }
         function closeVideo() {
-            document.getElementById('videoModal').style.display = 'none';
-            document.getElementById('videoPlayer').src = '';
+            document.getElementById('videoModal').classList.remove('active');
+            setTimeout(() => { document.getElementById('videoPlayer').src = ''; }, 500);
         }
 
-        // LIGHTBOX
-        const imgs = ["https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200","https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1200","https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=1200","https://images.unsplash.com/photo-1448375240586-882707db888b?w=1200","https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200","https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200","https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1200","https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200"];
-        function openLightbox(i) {
-            document.getElementById('lightbox-img').src = imgs[i];
-            document.getElementById('lightbox').style.display = 'flex';
-            setTimeout(() => document.getElementById('lightbox').classList.add('active'), 10);
-        }
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
-            setTimeout(() => document.getElementById('lightbox').style.display = 'none', 500);
-        }
-
-        // MODALS
         function openModal(name, m2) {
             document.getElementById('modalTitle').innerText = name;
             document.getElementById('modalDesc').innerText = `Superficie: ${m2} m²`;
-            document.getElementById('loteModal').style.display = 'flex';
-            setTimeout(() => document.getElementById('loteModal').classList.add('active'), 10);
+            document.getElementById('loteModal').classList.add('active');
         }
         function closeModal() {
             document.getElementById('loteModal').classList.remove('active');
-            setTimeout(() => document.getElementById('loteModal').style.display = 'none', 500);
         }
 
         const legalData = {
-            terminos: `
-                <h2 class="playfair" style="margin-bottom:20px; color:var(--verde-bosque);">Términos y Condiciones</h2>
-                <p style="margin-bottom:15px;">Bienvenido a Costa Mantagua. Al acceder a este sitio web, usted acepta cumplir con los siguientes términos y condiciones de uso.</p>
-                <h3 style="margin:15px 0;">1. Información General</h3>
-                <p style="margin-bottom:10px;">Este sitio web tiene carácter informativo sobre el proyecto inmobiliario. Las imágenes y planos son ilustrativos y pueden variar.</p>
-                <h3 style="margin:15px 0;">2. Disponibilidad de Lotes</h3>
-                <p style="margin-bottom:10px;">La disponibilidad mostrada es referencial. El proceso oficial de reserva requiere la firma de documentos legales y pago de garantía.</p>
-                <h3 style="margin:15px 0;">3. Propiedad Intelectual</h3>
-                <p style="margin-bottom:10px;">Todo el contenido es propiedad de la inmobiliaria y está protegido por las leyes de propiedad intelectual de Chile.</p>
-            `,
-            privacidad: `
-                <h2 class="playfair" style="margin-bottom:20px; color:var(--verde-bosque);">Política de Privacidad</h2>
-                <p style="margin-bottom:15px;">En Costa Mantagua valoramos su privacidad. De acuerdo con la Ley N° 19.628 sobre Protección de la Vida Privada de Chile, informamos lo siguiente:</p>
-                <h3 style="margin:15px 0;">Uso de Datos</h3>
-                <p style="margin-bottom:10px;">Los datos proporcionados a través de formularios se utilizan exclusivamente para contactarlo y brindarle información comercial sobre el proyecto.</p>
-                <h3 style="margin:15px 0;">Derechos del Usuario</h3>
-                <p style="margin-bottom:10px;">Usted puede solicitar la rectificación o eliminación de sus datos en cualquier momento enviando un correo a ventas@costamantagua.cl.</p>
-            `
+            terminos: `<h2>Términos y Condiciones</h2><p>Contenido informativo sobre el proyecto Costa Mantagua. Las imágenes y planos son ilustrativos y pueden estar sujetas a modificaciones.</p>`,
+            privacidad: `<h2>Política de Privacidad</h2><p>En Costa Mantagua valoramos su privacidad. Los datos proporcionados se utilizan exclusivamente para contactarlo y brindarle información sobre el proyecto.</p>`
         };
-
         function openLegal(type) {
             document.getElementById('legalContent').innerHTML = legalData[type];
-            document.getElementById('legalModal').style.display = 'flex';
-            setTimeout(() => document.getElementById('legalModal').classList.add('active'), 10);
+            document.getElementById('legalModal').classList.add('active');
         }
         function closeLegal() {
             document.getElementById('legalModal').classList.remove('active');
-            setTimeout(() => document.getElementById('legalModal').style.display = 'none', 500);
         }
 
-        // MAP
+        function openLightbox(i) {
+            const imgs = ["https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200","https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1200","https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=1200","https://images.unsplash.com/photo-1448375240586-882707db888b?w=1200","https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200","https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200","https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1200","https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200"];
+            document.getElementById('lightbox-img').src = imgs[i];
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
         const map = L.map('map', { scrollWheelZoom: false }).setView([-32.7833, -71.4500], 13);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
         L.marker([-32.7833, -71.4500]).addTo(map).bindPopup('Costa Mantagua').openPopup();
 
-        // FAQ
         document.querySelectorAll('.faq-question').forEach(q => {
             q.addEventListener('click', () => q.parentElement.classList.toggle('active'));
         });
 
-        // FORM VALIDATION
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            let allValid = true;
-            this.querySelectorAll('input').forEach(input => {
-                if(!input.checkValidity()) {
-                    input.parentElement.classList.add('shake');
-                    setTimeout(() => input.parentElement.classList.remove('shake'), 500);
-                    allValid = false;
-                }
+            let valid = true;
+            this.querySelectorAll('input[required]').forEach(i => {
+                if(!i.checkValidity()) { i.parentElement.classList.add('shake'); setTimeout(()=>i.parentElement.classList.remove('shake'), 500); valid = false; }
             });
-            if(allValid) {
-                this.style.display = 'none';
-                document.getElementById('successMsg').style.display = 'block';
-            }
+            if(valid) { this.style.display = 'none'; document.getElementById('successMsg').style.display = 'block'; }
         });
 
-        // MAGNETIC BUTTONS
-        const btns = document.querySelectorAll('.btn-cta');
-        btns.forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-            });
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = `translate(0, 0)`;
-            });
-        });
-
-        // PARTICLES
         const part = document.getElementById('particles');
         for(let i=0; i<15; i++) {
             let p = document.createElement('div');
@@ -991,11 +791,10 @@
             p.style.left = Math.random()*100+'%';
             p.style.top = Math.random()*100+'%';
             p.style.width = p.style.height = Math.random()*5+2+'px';
-            p.style.animationDelay = Math.random()*5+'s';
+            p.style.animation = `fadeIn ${Math.random()*5+2}s infinite alternate`;
             part.appendChild(p);
         }
 
-        // COUNTER
         const obs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
@@ -1012,7 +811,6 @@
         });
         document.querySelectorAll('.stat-val').forEach(v => obs.observe(v));
 
-        // FILTERS
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
